@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mine : MonoBehaviour
+public class Mine : TakeDamage
 {
     [SerializeField] private GameObject _explosionEffect;
     [SerializeField] private GameObject _forceObject;

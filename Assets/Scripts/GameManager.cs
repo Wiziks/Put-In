@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
         _timeLeftText.enabled = true;
         Time.timeScale = 1f;
         _timeLeftText.text = $"{(int)(_timeToLose - _timer)}";
-        _scoreText.text = $"Прогрес:{(int)score}/{_targetScore}";
+        UpdateScore();
     }
 
     void Update()
     {
-        _timer += Time.deltaTime;
+        //_timer += Time.deltaTime;
 
         _leftTimeScale.fillAmount = (_timeToLose - _timer) / _timeToLose;
         _timeLeftText.text = $"{(int)(_timeToLose - _timer)}";
@@ -54,10 +54,19 @@ public class GameManager : MonoBehaviour
         if (!Pointer.CheckHooked())
             currentScore *= 1.1f;
         score += currentScore;
-        _scoreText.text = $"Прогрес:{(int)score}/{_targetScore}";
+        UpdateScore();
         DamageText.Instance.ShowDamage(currentScore, point);
         if (score > _targetScore)
             WinGame();
+    }
+
+    public bool TryBuy(int price)
+    {
+        if (score < price)
+            return false;
+        score -= price;
+        UpdateScore();
+        return true;
     }
 
     private void WinGame()
@@ -81,5 +90,10 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void UpdateScore()
+    {
+        _scoreText.text = $"Прогрес:{(int)score}";
     }
 }

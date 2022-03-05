@@ -7,7 +7,8 @@ public class Pointer : MonoBehaviour
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _instructionPanel;
     [SerializeField] private Camera _camera;
-    [SerializeField] private BodyPart _selectedBodyPart;
+    [SerializeField] private CircleSelector _selectedBodyPart;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     private SpringJoint2D springJoint2D;
     private static bool isHooked;
     public static Pointer Instance;
@@ -28,12 +29,11 @@ public class Pointer : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(cursorWorldPosition, Vector2.zero);
         if (hit)
         {
-            _selectedBodyPart = null;
-            _selectedBodyPart = hit.collider.GetComponent<BodyPart>();
-            if (_selectedBodyPart)
+            if (_selectedBodyPart == hit.collider.GetComponent<CircleSelector>())
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    _spriteRenderer.enabled = true;
                     if (!firstTime)
                     {
                         Body.Instance.BecomeDynamic();
@@ -43,7 +43,7 @@ public class Pointer : MonoBehaviour
                     }
                     DestroySpringJoint();
                     springJoint2D = gameObject.AddComponent<SpringJoint2D>();
-                    springJoint2D.connectedBody = _selectedBodyPart.GetComponent<Rigidbody2D>();
+                    springJoint2D.connectedBody = _selectedBodyPart.GetBodyPart().GetComponent<Rigidbody2D>();
                     springJoint2D.autoConfigureDistance = false;
                     springJoint2D.distance = 0f;
                     springJoint2D.frequency = 5f;
@@ -57,6 +57,7 @@ public class Pointer : MonoBehaviour
         {
             DestroySpringJoint();
             isHooked = false;
+            _spriteRenderer.enabled = false;
         }
     }
 
