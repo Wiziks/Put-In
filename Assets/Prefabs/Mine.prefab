@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2005701760098572455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2005701760318488801}
@@ -52,6 +52,7 @@ MonoBehaviour:
   _borderVelocity: 0
   _damageKoeficient: 1
   _placeType: 3
+  Collider: {fileID: 2386160285592080309}
   _explosionEffect: {fileID: 2005701760753405578}
   _forceObject: {fileID: 2005701760318488803}
   _model: {fileID: 2005701760630463820}
@@ -68,8 +69,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.5, y: 1}
+  m_Offset: {x: 0, y: -0.2}
+  m_Size: {x: 1, y: 0.6}
   m_Direction: 1
 --- !u!1 &2005701760318488803
 GameObject:
@@ -165,8 +166,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005701760630463822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2005701760098572454}

@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _horizontalBorder = 6.5f;
     [SerializeField] private float _verticalBorder = 5.5f;
 
+    public static Dictionary<Vector2Int, Weapon> WeaponDictionary = new Dictionary<Vector2Int, Weapon>();
+
     void Start()
     {
         Instance = this;
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
             if (distance < minDistance)
             {
                 minDistance = distance;
-                closestY = childTransform.position.y + childTransform.localScale.y;
+                closestY = childTransform.position.y + childTransform.localScale.y / 2;
             }
         }
         return closestY;
@@ -152,7 +154,7 @@ public class GameManager : MonoBehaviour
             if (distance < minDistance)
             {
                 minDistance = distance;
-                closestY = childTransform.position.y - childTransform.localScale.y;
+                closestY = childTransform.position.y - childTransform.localScale.y / 2;
             }
         }
         return closestY;

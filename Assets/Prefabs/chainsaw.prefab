@@ -102,6 +102,8 @@ MonoBehaviour:
   _price: 0
   _borderVelocity: 0
   _damageKoeficient: 2
+  _placeType: 0
+  Collider: {fileID: 7863151826255365830}
 --- !u!58 &7863151826255365830
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -102,6 +102,7 @@ MonoBehaviour:
   _borderVelocity: 0
   _damageKoeficient: 3
   _placeType: 2
+  Collider: {fileID: 2347945824980345679}
 --- !u!61 &2347945824980345679
 BoxCollider2D:
   m_ObjectHideFlags: 0
