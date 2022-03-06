@@ -96,11 +96,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2062717526421108469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf427a3eec1e96469ecf8a03bba65b0, type: 3}
+  m_Script: {fileID: 11500000, guid: c03add62fbf8a74418fa56e1001f0985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _price: 0
   _borderVelocity: 0
-  _damageKoeficient: 5
+  _damageKoeficient: 2
 --- !u!58 &7863151826255365830
 CircleCollider2D:
   m_ObjectHideFlags: 0

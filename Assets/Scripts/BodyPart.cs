@@ -19,7 +19,7 @@ public class BodyPart : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        TakeDamage takeDamage = other.gameObject.GetComponent<TakeDamage>();
+        Weapon takeDamage = other.gameObject.GetComponent<Weapon>();
         if (takeDamage)
         {
             if (other.relativeVelocity.magnitude >= takeDamage.GetBorderVelocity())

@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2005701760098572454}
   - component: {fileID: 2005701760098572453}
-  - component: {fileID: -5141854915777233647}
-  - component: {fileID: 4811078494684699170}
+  - component: {fileID: 2386160285592080309}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -27,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005701760098572455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32, y: -2.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2005701760318488801}
@@ -49,25 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272a15e7e3948f44bbcdf1a2c95dea7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _price: 0
+  _borderVelocity: 0
+  _damageKoeficient: 1
+  _placeType: 3
   _explosionEffect: {fileID: 2005701760753405578}
   _forceObject: {fileID: 2005701760318488803}
   _model: {fileID: 2005701760630463820}
---- !u!114 &-5141854915777233647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005701760098572455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf427a3eec1e96469ecf8a03bba65b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _borderVelocity: 0
-  _damageKoeficient: 10
---- !u!58 &4811078494684699170
-CircleCollider2D:
+--- !u!70 &2386160285592080309
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80,8 +69,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.5, y: 1}
+  m_Direction: 1
 --- !u!1 &2005701760318488803
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 2005701760630463822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2005701760098572454}

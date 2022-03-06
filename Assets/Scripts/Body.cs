@@ -18,7 +18,7 @@ public class Body : MonoBehaviour
     {
         Time.timeScale = 1f;
         Instance = this;
-        StartCoroutine(StartCutScene());
+        //StartCoroutine(StartCutScene());
     }
     public void BecomeDynamic()
     {

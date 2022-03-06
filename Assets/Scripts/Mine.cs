@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mine : TakeDamage
+public class Mine : Weapon
 {
     [SerializeField] private GameObject _explosionEffect;
     [SerializeField] private GameObject _forceObject;

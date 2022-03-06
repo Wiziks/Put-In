@@ -22,6 +22,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
     public static GameManager Instance;
+    [Header("Editing World")]
+    [SerializeField] private Transform _obstacles;
+    [SerializeField] private Transform _walls;
+    [SerializeField] private Transform _roof;
+    [SerializeField] private Transform _floor;
+    [Header("World Borders")]
+    [SerializeField] private float _horizontalBorder = 6.5f;
+    [SerializeField] private float _verticalBorder = 5.5f;
 
     void Start()
     {
@@ -96,4 +104,60 @@ public class GameManager : MonoBehaviour
     {
         _scoreText.text = $"Прогрес:{(int)score}";
     }
+
+    public Transform GetParent() { return _obstacles; }
+
+    public float GetClosestXWall(Vector3 position)
+    {
+        float minDistance = float.MaxValue;
+        float closestX = float.MaxValue;
+        for (int i = 0; i < _walls.childCount; i++)
+        {
+            Transform childTransform = _walls.GetChild(i).transform;
+            float distance = Vector2.Distance(childTransform.position, position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestX = childTransform.position.x + childTransform.localScale.x;
+            }
+        }
+        return closestX;
+    }
+
+    public float GetClosestYFloor(Vector3 position)
+    {
+        float minDistance = float.MaxValue;
+        float closestY = float.MaxValue;
+        for (int i = 0; i < _floor.childCount; i++)
+        {
+            Transform childTransform = _floor.GetChild(i).transform;
+            float distance = Vector3.Distance(childTransform.position, position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestY = childTransform.position.y + childTransform.localScale.y;
+            }
+        }
+        return closestY;
+    }
+
+    public float GetClosestYRoof(Vector3 position)
+    {
+        float minDistance = float.MaxValue;
+        float closestY = float.MaxValue;
+        for (int i = 0; i < _roof.childCount; i++)
+        {
+            Transform childTransform = _roof.GetChild(i).transform;
+            float distance = Vector3.Distance(childTransform.position, position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestY = childTransform.position.y - childTransform.localScale.y;
+            }
+        }
+        return closestY;
+    }
+
+    public float GetVerticalBorder() { return _verticalBorder; }
+    public float GetHorizontalBorder() { return _horizontalBorder; }
 }
