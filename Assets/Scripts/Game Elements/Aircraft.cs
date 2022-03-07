@@ -13,7 +13,6 @@ public class Aircraft : MonoBehaviour
     [Header("Aircraft")]
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private Transform target;
-    [SerializeField] private float _speed;
     [SerializeField] private float _timeToMad;
 
     [Header("Bullet")]
@@ -82,7 +81,7 @@ public class Aircraft : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, GameManager.Speed * Time.deltaTime);
             timer = 0;
         }
     }
@@ -93,18 +92,36 @@ public class Aircraft : MonoBehaviour
         RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, 1f);
         Debug.DrawRay(transform.position, Vector2.up, Color.red);
         Debug.DrawRay(transform.position, Vector2.down, Color.red);
-        if (!hitUp)
+        if (target.position.y < transform.position.y)
         {
-            transform.Translate(Vector2.up * _speed * Time.deltaTime);
-        }
-        else if (!hitDown)
-        {
-            transform.Translate(Vector2.down * _speed * Time.deltaTime);
+            if (!hitDown)
+            {
+                transform.Translate(Vector2.down * GameManager.Speed * Time.deltaTime);
+            }
+            else
+                Shot();
         }
         else
         {
-            Shot();
+            if (!hitUp)
+            {
+                transform.Translate(Vector2.up * GameManager.Speed * Time.deltaTime);
+            }
+            else
+                Shot();
         }
+        // if (!hitUp)
+        // {
+        //     transform.Translate(Vector2.up * GameManager.Speed * Time.deltaTime);
+        // }
+        // else if (!hitDown)
+        // {
+        //     transform.Translate(Vector2.down * GameManager.Speed * Time.deltaTime);
+        // }
+        // else
+        // {
+        //     Shot();
+        // }
     }
 
     void Shot()
@@ -117,6 +134,7 @@ public class Aircraft : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
+        if(other.GetComponent<BodyPart>())
+            GameManager.Instance.GameOver();
     }
 }

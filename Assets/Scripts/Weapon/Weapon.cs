@@ -14,13 +14,23 @@ public enum PlaceType
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private int _price;
-    [SerializeField] private float _borderVelocity = 10f;
     [SerializeField] private float _damageKoeficient = 1f;
     [SerializeField] private PlaceType _placeType;
     [SerializeField] private Vector2Int _size = new Vector2Int(1, 1);
+    [SerializeField] private SpriteRenderer _sprite;
     public Collider2D Collider;
 
-    public float GetBorderVelocity() { return _borderVelocity; }
+    void Update()
+    {
+        if (_placeType == PlaceType.Walls)
+        {
+            if (transform.position.x > 0)
+                _sprite.flipX = true;
+            else
+                _sprite.flipX = false;
+        }
+    }
+
     public float GetKoeficient() { return _damageKoeficient; }
     public int GetPrice() { return _price; }
     public PlaceType GetPlaceType() { return _placeType; }
@@ -33,7 +43,7 @@ public class Weapon : MonoBehaviour
             for (int j = 0; j < _size.y; j++)
             {
                 Vector2Int cell = new Vector2Int((int)transform.position.x + i, (int)transform.position.x + j);
-                if(GameManager.WeaponDictionary.ContainsKey(cell))
+                if (GameManager.WeaponDictionary.ContainsKey(cell))
                     GameManager.WeaponDictionary.Remove(cell);
             }
         }

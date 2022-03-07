@@ -12,11 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _targetScore = 1000;
     float score;
 
-    [Header("Time")]
-    [SerializeField] private Image _leftTimeScale;
-    [SerializeField] private TextMeshProUGUI _timeLeftText;
-    [SerializeField] private float _timeToLose = 60f;
-    private float _timer;
+    [Header("Aircraft Speed")]
+    [SerializeField] private float _startSpeed = 0.5f;
+    public static float Speed { get; private set; }
 
     [Header("Game Panels")]
     [SerializeField] private GameObject _winPanel;
@@ -31,29 +29,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _horizontalBorder = 6.5f;
     [SerializeField] private float _verticalBorder = 5.5f;
 
-    public static Dictionary<Vector2Int, Weapon> WeaponDictionary = new Dictionary<Vector2Int, Weapon>();
+    public static Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
 
     void Start()
     {
         Instance = this;
         _scoreText.enabled = true;
-        _leftTimeScale.enabled = true;
-        _timeLeftText.enabled = true;
         Time.timeScale = 1f;
-        _timeLeftText.text = $"{(int)(_timeToLose - _timer)}";
+        Speed = _startSpeed;
         UpdateScore();
     }
 
-    void Update()
+    IEnumerator SpeedChanger()
     {
-        //_timer += Time.deltaTime;
-
-        _leftTimeScale.fillAmount = (_timeToLose - _timer) / _timeToLose;
-        _timeLeftText.text = $"{(int)(_timeToLose - _timer)}";
-
-        if (_timer > _timeToLose)
+        while(true)
         {
-            GameOver();
+            Speed += 0.0001f;
+            yield return null;
         }
     }
 
@@ -91,7 +83,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         _losePanel.SetActive(true);
         Time.timeScale = 0f;

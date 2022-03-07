@@ -21,6 +21,8 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private EditState editState;
     CameraManager followTarget;
     Image shopPanel;
+    private Vector2 playerPosition;
+    private Vector2 aircraftPosition;
 
     void Start()
     {
@@ -77,7 +79,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         _currentWeapon = Instantiate(_prefab, GameManager.Instance.GetParent());
         _currentWeapon.transform.position = AddRandomStartPosition();
         _currentWeapon.Collider.enabled = false;
-        Time.timeScale = 0.05f;
+        Time.timeScale = 0;
         CameraManager.Instance.Zoom(7);
         shopPanel.color = new Color(shopPanel.color.r, shopPanel.color.g, shopPanel.color.b, 0);
         AddTemporaryRecords();
@@ -92,7 +94,6 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         editState = EditState.None;
         CameraManager.Instance.Zoom(5);
         shopPanel.color = new Color(shopPanel.color.r, shopPanel.color.g, shopPanel.color.b, 53f / 225f);
-        RemoveTemporaryRecords();
     }
 
     Vector2 AddRandomStartPosition()
@@ -125,8 +126,10 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             for (int j = 0; j < _currentWeapon.GetSize().y; j++)
             {
-                Vector2Int cell = new Vector2Int((int)x + i, (int)y + j);
+                Vector2 cell = new Vector2(x + i, y + j);
                 if (GameManager.WeaponDictionary.ContainsKey(cell))
+                    return false;
+                else if (cell == playerPosition || cell == aircraftPosition)
                     return false;
             }
         }
@@ -164,11 +167,13 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void AddTemporaryRecords()
     {
-        
-    }
+        RoundToHalf(CircleSelector.Instance.transform.position, out float x, out float y);
+        CircleSelector.Instance.transform.parent.position = new Vector2(x, y);
+        playerPosition = CircleSelector.Instance.transform.parent.position;
 
-    void RemoveTemporaryRecords()
-    {
 
+        RoundToHalf(Aircraft.Instance.transform.position, out x, out y);
+        Aircraft.Instance.transform.position = new Vector2(x, y);
+        aircraftPosition = Aircraft.Instance.transform.position;
     }
 }

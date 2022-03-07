@@ -22,9 +22,16 @@ public class BodyPart : MonoBehaviour
         Weapon takeDamage = other.gameObject.GetComponent<Weapon>();
         if (takeDamage)
         {
-            if (other.relativeVelocity.magnitude >= takeDamage.GetBorderVelocity())
+            GameManager.Instance.AddScore(takeDamage.GetKoeficient(), _damageMultiplier, transform.position);
+            return;
+        }
+
+        Wall wall = other.gameObject.GetComponent<Wall>();
+        if (wall)
+        {
+            if (other.relativeVelocity.magnitude >= wall.GetBorderVelocity())
             {
-                GameManager.Instance.AddScore(takeDamage.GetKoeficient(), _damageMultiplier, transform.position);
+                GameManager.Instance.AddScore(wall.GetKoeficient(), _damageMultiplier, transform.position);
             }
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pointer : MonoBehaviour
 {
+    [SerializeField] private GameObject ShopPanel;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _instructionPanel;
     [SerializeField] private Camera _camera;
@@ -18,6 +19,7 @@ public class Pointer : MonoBehaviour
     {
         Instance = this;
         Cursor.visible = false;
+        ShopPanel.SetActive(false);
     }
 
     void Update()
@@ -40,6 +42,7 @@ public class Pointer : MonoBehaviour
                         _instructionPanel.SetActive(false);
                         _gameManager.gameObject.SetActive(true);
                         Aircraft.Instance.enabled = true;
+                        ShopPanel.SetActive(true);
                         firstTime = true;
                     }
                     DestroySpringJoint();

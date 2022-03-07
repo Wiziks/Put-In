@@ -5,7 +5,7 @@ using UnityEngine;
 public class CircleSelector : MonoBehaviour
 {
     [SerializeField] private BodyPart _majorBodyPart;
-    CircleSelector Instance;
+    public static CircleSelector Instance;
     void Start()
     {
         Instance = this;
