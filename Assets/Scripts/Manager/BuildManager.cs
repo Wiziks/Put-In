@@ -168,11 +168,15 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void AddTemporaryRecords()
     {
         RoundToHalf(CircleSelector.Instance.transform.position, out float x, out float y);
+        x = Mathf.Clamp(x, -GameManager.Instance.GetHorizontalBorder(), GameManager.Instance.GetHorizontalBorder());
+        y = Mathf.Clamp(y, -GameManager.Instance.GetVerticalBorder(), GameManager.Instance.GetVerticalBorder());
         CircleSelector.Instance.transform.parent.position = new Vector2(x, y);
         playerPosition = CircleSelector.Instance.transform.parent.position;
 
 
         RoundToHalf(Aircraft.Instance.transform.position, out x, out y);
+        x = Mathf.Clamp(x, -GameManager.Instance.GetHorizontalBorder(), GameManager.Instance.GetHorizontalBorder());
+        y = Mathf.Clamp(y, -GameManager.Instance.GetVerticalBorder(), GameManager.Instance.GetVerticalBorder());
         Aircraft.Instance.transform.position = new Vector2(x, y);
         aircraftPosition = Aircraft.Instance.transform.position;
     }

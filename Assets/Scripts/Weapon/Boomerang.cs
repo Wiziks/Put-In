@@ -12,6 +12,14 @@ public class Boomerang : Weapon
         if (!Collider.enabled) return;
 
         ClearDictionary();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionVector, 0.5f);
+        if (hit)
+        {
+            if (hit.collider.GetComponent<Weapon>())
+                ChangeDirection();
+            else if (hit.collider.GetComponent<Wall>())
+                ChangeDirection();
+        }
         transform.Translate(directionVector * _speed * Time.deltaTime);
     }
 
