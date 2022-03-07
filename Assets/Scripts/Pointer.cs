@@ -39,6 +39,7 @@ public class Pointer : MonoBehaviour
                         Body.Instance.BecomeDynamic();
                         _instructionPanel.SetActive(false);
                         _gameManager.gameObject.SetActive(true);
+                        Aircraft.Instance.enabled = true;
                         firstTime = true;
                     }
                     DestroySpringJoint();

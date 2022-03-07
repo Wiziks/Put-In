@@ -20,6 +20,7 @@ public class Missle : Weapon
             if (hit.rigidbody)
                 if (hit.rigidbody.GetComponent<BodyPart>())
                 {
+                    ClearDictionary();
                     launch = true;
                     Destroy(gameObject, 5f);
                 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -19,12 +20,14 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private new Camera camera;
     private EditState editState;
     CameraManager followTarget;
+    Image shopPanel;
 
     void Start()
     {
         camera = Camera.main;
         _priceText.text = _prefab.GetPrice().ToString();
         followTarget = camera.GetComponent<CameraManager>();
+        shopPanel = transform.parent.GetComponent<Image>();
     }
 
     void Update()
@@ -74,8 +77,10 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         _currentWeapon = Instantiate(_prefab, GameManager.Instance.GetParent());
         _currentWeapon.transform.position = AddRandomStartPosition();
         _currentWeapon.Collider.enabled = false;
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.05f;
         CameraManager.Instance.Zoom(7);
+        shopPanel.color = new Color(shopPanel.color.r, shopPanel.color.g, shopPanel.color.b, 0);
+        AddTemporaryRecords();
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -86,6 +91,8 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Time.timeScale = 1f;
         editState = EditState.None;
         CameraManager.Instance.Zoom(5);
+        shopPanel.color = new Color(shopPanel.color.r, shopPanel.color.g, shopPanel.color.b, 53f / 225f);
+        RemoveTemporaryRecords();
     }
 
     Vector2 AddRandomStartPosition()
@@ -153,5 +160,15 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             x *= -1;
         if (point.y < 0)
             y *= -1;
+    }
+
+    void AddTemporaryRecords()
+    {
+        
+    }
+
+    void RemoveTemporaryRecords()
+    {
+
     }
 }
