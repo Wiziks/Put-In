@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Aircraft Speed")]
     [SerializeField] private float _startSpeed = 0.5f;
-    public static float Speed { get; private set; }
+    public float Speed { get; private set; }
 
     [Header("Game Panels")]
     [SerializeField] private GameObject _winPanel;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _horizontalBorder = 6.5f;
     [SerializeField] private float _verticalBorder = 5.5f;
 
-    public static Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
+    public Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpeedChanger()
     {
-        while(true)
+        while (true)
         {
             Speed += 0.0001f;
             yield return null;
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    [ContextMenu("Reload")]
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

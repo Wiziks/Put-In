@@ -20,21 +20,29 @@ public class SnapScrolling : MonoBehaviour
     private bool isScrolling;
     private Vector2 contVec;
     private Vector2[] pansScale;
-
+    [SerializeField] private Sprite[] _sprite;
+    [SerializeField] private string[] _nameText;
+    [SerializeField] private int[] _cost;
+    [SerializeField] private int[] _strength;
+    [SerializeField] private int[] _price;
 
     void Start()
     {
-        panCount = 10;
+        panCount = _sprite.Length;
 
         rectTransform = GetComponent<RectTransform>();
         instPans = new GameObject[panCount];
         pansPos = new Vector2[panCount];
         pansScale = new Vector2[panCount];
+
         for (int i = 0; i < panCount; i++)
         {
             instPans[i] = Instantiate(panPrefab, transform, false);
-
-
+            instPans[i].transform.GetChild(0).GetComponent<Image>().sprite = _sprite[i];
+            instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _nameText[i];
+            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"Стоимость - {_cost[i]}";
+            instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"Прочность - {_strength[i]}";
+            instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_price[i]}";
             if (i == 0) continue;
             instPans[i].transform.localPosition = new Vector2(instPans[i - 1].transform.localPosition.x +
             panPrefab.GetComponent<RectTransform>().sizeDelta.x + panOffset, instPans[i].transform.localPosition.y);
@@ -88,4 +96,6 @@ public class SnapScrolling : MonoBehaviour
     {
         return isScrolling;
     }
+
+    
 }

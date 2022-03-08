@@ -7,8 +7,8 @@ public class DamageText : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private int _poolCapacity = 5;
     [SerializeField] private TextElement _textPrefab;
-    private static TextElement[] textPool;
-    private static int currentElement = 0;
+    private TextElement[] textPool;
+    private int currentElement = 0;
     public static DamageText Instance;
     void Start()
     {

@@ -24,4 +24,9 @@ public class Slide : MonoBehaviour
         }
         rectTransform.position = targetVector;
     }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 }

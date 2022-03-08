@@ -127,7 +127,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             for (int j = 0; j < _currentWeapon.GetSize().y; j++)
             {
                 Vector2 cell = new Vector2(x + i, y + j);
-                if (GameManager.WeaponDictionary.ContainsKey(cell))
+                if (GameManager.Instance.WeaponDictionary.ContainsKey(cell))
                     return false;
                 else if (cell == playerPosition || cell == aircraftPosition)
                     return false;
@@ -143,7 +143,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             for (int j = 0; j < _currentWeapon.GetSize().y; j++)
             {
-                GameManager.WeaponDictionary.Add(new Vector2Int((int)x + i, (int)y + j), _currentWeapon);
+                GameManager.Instance.WeaponDictionary.Add(new Vector2Int((int)x + i, (int)y + j), _currentWeapon);
             }
         }
         _currentWeapon.transform.position = new Vector2(x, y);

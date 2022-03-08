@@ -81,7 +81,7 @@ public class Aircraft : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, GameManager.Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, GameManager.Instance.Speed * Time.deltaTime);
             timer = 0;
         }
     }
@@ -96,7 +96,7 @@ public class Aircraft : MonoBehaviour
         {
             if (!hitDown)
             {
-                transform.Translate(Vector2.down * GameManager.Speed * Time.deltaTime);
+                transform.Translate(Vector2.down * GameManager.Instance.Speed * Time.deltaTime);
             }
             else
                 Shot();
@@ -105,7 +105,7 @@ public class Aircraft : MonoBehaviour
         {
             if (!hitUp)
             {
-                transform.Translate(Vector2.up * GameManager.Speed * Time.deltaTime);
+                transform.Translate(Vector2.up * GameManager.Instance.Speed * Time.deltaTime);
             }
             else
                 Shot();
