@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 8786035900506199321}
   - component: {fileID: 2005701760099259104}
   m_Layer: 0
-  m_Name: Bayrakter
+  m_Name: Bayraktar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
