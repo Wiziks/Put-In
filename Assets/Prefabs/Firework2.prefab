@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 5143813644763690138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6324893396761616251}
@@ -164,4 +164,13 @@ MonoBehaviour:
   _strenght: 1
   _sprite: {fileID: 3086661278919603090}
   _price: 0
+  EventOnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnStand:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
   Collider: {fileID: 5143813644763690137}
