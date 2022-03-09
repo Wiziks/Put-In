@@ -35,5 +35,10 @@ public class AircraftBullet : MonoBehaviour
             rigidbody2D.bodyType = RigidbodyType2D.Static;
             gameObject.SetActive(false);
         }
+        else if (other.gameObject.GetComponent<Wall>())
+        {
+            rigidbody2D.bodyType = RigidbodyType2D.Static;
+            gameObject.SetActive(false);
+        }
     }
 }

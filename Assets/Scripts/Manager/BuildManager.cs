@@ -36,7 +36,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (editState == EditState.None) return;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && _currentWeapon)
         {
             editState = EditState.Drag;
             CameraManager.Instance.ConstantTarget(Vector2.zero);
@@ -73,27 +73,36 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!GameManager.Instance.TryBuy(_prefab.GetPrice())) return;
+        if (!GameManager.Instance.TryBuy(_prefab.GetCost())) return;
 
         editState = EditState.Buy;
         _currentWeapon = Instantiate(_prefab, GameManager.Instance.GetParent());
-        _currentWeapon.transform.position = AddRandomStartPosition();
-        _currentWeapon.Collider.enabled = false;
-        Time.timeScale = 0;
         CameraManager.Instance.Zoom(7);
         shopPanel.color = new Color(shopPanel.color.r, shopPanel.color.g, shopPanel.color.b, 0);
-        AddTemporaryRecords();
+        if (_currentWeapon.GetPlaceType() != PlaceType.NotPlaceble)
+        {
+            Time.timeScale = 0;
+            _currentWeapon.transform.position = AddRandomStartPosition();
+            _currentWeapon.Collider.enabled = false;
+            AddTemporaryRecords();
+        }
+        else
+            _currentWeapon = null;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        AddToDictionary();
-        _currentWeapon.Collider.enabled = true;
-        _currentWeapon = null;
-        Time.timeScale = 1f;
         editState = EditState.None;
-        CameraManager.Instance.Zoom(5);
         shopPanel.color = new Color(shopPanel.color.r, shopPanel.color.g, shopPanel.color.b, 53f / 225f);
+        if (_currentWeapon)
+        {
+            CameraManager.Instance.Zoom(5);
+            AddToDictionary();
+            _currentWeapon.Stand();
+            _currentWeapon.Collider.enabled = true;
+            Time.timeScale = 1f;
+            _currentWeapon = null;
+        }
     }
 
     Vector2 AddRandomStartPosition()
@@ -173,11 +182,12 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         CircleSelector.Instance.transform.parent.position = new Vector2(x, y);
         playerPosition = CircleSelector.Instance.transform.parent.position;
 
-
         RoundToHalf(Aircraft.Instance.transform.position, out x, out y);
         x = Mathf.Clamp(x, -GameManager.Instance.GetHorizontalBorder(), GameManager.Instance.GetHorizontalBorder());
         y = Mathf.Clamp(y, -GameManager.Instance.GetVerticalBorder(), GameManager.Instance.GetVerticalBorder());
         Aircraft.Instance.transform.position = new Vector2(x, y);
         aircraftPosition = Aircraft.Instance.transform.position;
     }
+
+    public Weapon GetPrefab() { return _prefab; }
 }

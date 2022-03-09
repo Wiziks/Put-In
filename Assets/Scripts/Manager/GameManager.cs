@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private int _targetScore = 1000;
     float score;
+    float rawScore;
 
     [Header("Aircraft Speed")]
     [SerializeField] private float _startSpeed = 0.5f;
@@ -20,14 +20,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
     public static GameManager Instance;
+
     [Header("Editing World")]
     [SerializeField] private Transform _obstacles;
     [SerializeField] private Transform _walls;
     [SerializeField] private Transform _roof;
     [SerializeField] private Transform _floor;
+
     [Header("World Borders")]
     [SerializeField] private float _horizontalBorder = 6.5f;
     [SerializeField] private float _verticalBorder = 5.5f;
+
 
     public Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
 
@@ -56,10 +59,15 @@ public class GameManager : MonoBehaviour
         if (!Pointer.CheckHooked())
             currentScore *= 1.1f;
         score += currentScore;
+
+        rawScore += currentScore;
+        if (rawScore % 10 == 0)
+        {
+            Resource.Instance.ChangeValue(1);
+        }
+
         UpdateScore();
         DamageText.Instance.ShowDamage(currentScore, point);
-        if (score > _targetScore)
-            WinGame();
     }
 
     public bool TryBuy(int price)
@@ -155,4 +163,7 @@ public class GameManager : MonoBehaviour
 
     public float GetVerticalBorder() { return _verticalBorder; }
     public float GetHorizontalBorder() { return _horizontalBorder; }
+
+    [ContextMenu("Delete all")]
+    public void DeleteAll() { PlayerPrefs.DeleteAll(); }
 }

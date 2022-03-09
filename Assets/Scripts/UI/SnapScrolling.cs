@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,15 +21,13 @@ public class SnapScrolling : MonoBehaviour
     private bool isScrolling;
     private Vector2 contVec;
     private Vector2[] pansScale;
-    [SerializeField] private Sprite[] _sprite;
-    [SerializeField] private string[] _nameText;
-    [SerializeField] private int[] _cost;
-    [SerializeField] private int[] _strength;
-    [SerializeField] private int[] _price;
+    public static SnapScrolling Instance;
+    [SerializeField] private Weapon[] _weapons;
 
     void Start()
     {
-        panCount = _sprite.Length;
+        Instance = this;
+        panCount = _weapons.Length;
 
         rectTransform = GetComponent<RectTransform>();
         instPans = new GameObject[panCount];
@@ -38,11 +37,17 @@ public class SnapScrolling : MonoBehaviour
         for (int i = 0; i < panCount; i++)
         {
             instPans[i] = Instantiate(panPrefab, transform, false);
-            instPans[i].transform.GetChild(0).GetComponent<Image>().sprite = _sprite[i];
-            instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _nameText[i];
-            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"Стоимость - {_cost[i]}";
-            instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"Прочность - {_strength[i]}";
-            instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_price[i]}";
+            instPans[i].transform.GetChild(0).GetComponent<Image>().sprite = _weapons[i].GetSprite();
+            instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
+            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"Стоимость - {_weapons[i].GetCost()}";
+            instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"Прочность - {_weapons[i].GetStrenght()}";
+            if (!_weapons[i].GetActive())
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetPrice()}";
+            instPans[i].transform.GetChild(5).GetComponent<BuyButton>().SetWeapon(_weapons[i]);
+            instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(instPans[i].transform.GetChild(5).GetComponent<BuyButton>().TryBuy);
+            instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(Refresh);
+            if (_weapons[i].GetActive())
+                instPans[i].transform.GetChild(5).gameObject.SetActive(false);
             if (i == 0) continue;
             instPans[i].transform.localPosition = new Vector2(instPans[i - 1].transform.localPosition.x +
             panPrefab.GetComponent<RectTransform>().sizeDelta.x + panOffset, instPans[i].transform.localPosition.y);
@@ -97,5 +102,20 @@ public class SnapScrolling : MonoBehaviour
         return isScrolling;
     }
 
-    
+    public void Refresh()
+    {
+        for (int i = 0; i < panCount; i++)
+        {
+            if (_weapons[i].GetActive())
+            {
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "";
+                instPans[i].transform.GetChild(5).gameObject.SetActive(false);
+            }
+            else
+            {
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetPrice()}";
+                instPans[i].transform.GetChild(5).gameObject.SetActive(true);
+            }
+        }
+    }
 }

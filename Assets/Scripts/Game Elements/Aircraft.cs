@@ -18,6 +18,7 @@ public class Aircraft : MonoBehaviour
     [Header("Bullet")]
     [SerializeField] private AircraftBullet _bullet;
     [SerializeField] private float _startSpeed;
+    private float speedMultiplier = 1f;
     private Direction current;
     private float timer;
     public static Aircraft Instance;
@@ -32,12 +33,12 @@ public class Aircraft : MonoBehaviour
     {
         if (transform.position.x > target.position.x)
         {
-            _sprite.flipX = true;
+            _sprite.flipX = false;
             current = Direction.Left;
         }
         else if (transform.position.x < target.position.x)
         {
-            _sprite.flipX = false;
+            _sprite.flipX = true;
             current = Direction.Right;
         }
 
@@ -81,7 +82,7 @@ public class Aircraft : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, GameManager.Instance.Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speedMultiplier * GameManager.Instance.Speed * Time.deltaTime);
             timer = 0;
         }
     }
@@ -136,5 +137,10 @@ public class Aircraft : MonoBehaviour
     {
         if(other.GetComponent<BodyPart>())
             GameManager.Instance.GameOver();
+    }
+
+    public void SetSpeedMultiplier(float value)
+    {
+        speedMultiplier = value;
     }
 }
