@@ -17,9 +17,9 @@ public class Box : Weapon
     {
         for (int i = 0; i < _strenght; i++)
         {
-            Instantiate(_fireworkPrefab1, transform.position, Quaternion.identity, transform).Setup(Random.Range(3f, 5f), Random.Range(-50f, 50f));
+            Instantiate(_fireworkPrefab1, transform.position, Quaternion.identity, transform).Setup(Random.Range(3f, 5f), Random.Range(-50f, -10f));
             Instantiate(_fireworkPrefab2, transform.position, Quaternion.identity, transform).Setup(Random.Range(3f, 5f), 0);
-            Instantiate(_fireworkPrefab3, transform.position, Quaternion.identity, transform).Setup(Random.Range(3f, 5f), Random.Range(-50f, 50f));
+            Instantiate(_fireworkPrefab3, transform.position, Quaternion.identity, transform).Setup(Random.Range(3f, 5f), Random.Range(10f, 50f));
             yield return new WaitForSeconds(3);
         }
         Destroy(gameObject);

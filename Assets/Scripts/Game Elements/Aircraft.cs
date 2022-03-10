@@ -60,6 +60,25 @@ public class Aircraft : MonoBehaviour
         }
     }
 
+    void Adjustment()
+    {
+        Vector2 adjustmentVector = Vector2.zero;
+        RaycastHit2D hitUp1 = Physics2D.Raycast(transform.position + Vector3.right, Vector2.up, 1f);
+        RaycastHit2D hitUp2 = Physics2D.Raycast(transform.position - Vector3.right, Vector2.up, 1f);
+        RaycastHit2D hitDown1 = Physics2D.Raycast(transform.position + Vector3.right, -Vector2.up, 1f);
+        RaycastHit2D hitDown2 = Physics2D.Raycast(transform.position - Vector3.right, -Vector2.up, 1f);
+        if (hitUp1)
+            adjustmentVector += Vector2.left + Vector2.down;
+        if (hitUp2)
+            adjustmentVector += Vector2.right + Vector2.down;
+        if (hitDown1)
+            adjustmentVector += Vector2.left + Vector2.up;
+        if (hitDown2)
+            adjustmentVector += Vector2.right + Vector2.up;
+
+        transform.Translate(adjustmentVector * speedMultiplier * GameManager.Instance.Speed * Time.deltaTime);
+    }
+
     void Move(RaycastHit2D hit1, RaycastHit2D hit2)
     {
         if (_bullet.gameObject.activeSelf) return;
@@ -89,15 +108,15 @@ public class Aircraft : MonoBehaviour
 
     void AvoidObstacle()
     {
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, 1f);
-        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, 1f);
-        Debug.DrawRay(transform.position, Vector2.up, Color.red);
-        Debug.DrawRay(transform.position, Vector2.down, Color.red);
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, 1.5f);
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, 1.5f);
+        Debug.DrawRay(transform.position, Vector2.up * 0f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.down * 0f, Color.red);
         if (target.position.y < transform.position.y)
         {
             if (!hitDown)
             {
-                transform.Translate(Vector2.down * GameManager.Instance.Speed * Time.deltaTime);
+                transform.Translate(Vector2.down * speedMultiplier * GameManager.Instance.Speed * Time.deltaTime);
             }
             else
                 Shot();
@@ -106,23 +125,11 @@ public class Aircraft : MonoBehaviour
         {
             if (!hitUp)
             {
-                transform.Translate(Vector2.up * GameManager.Instance.Speed * Time.deltaTime);
+                transform.Translate(Vector2.up * speedMultiplier * GameManager.Instance.Speed * Time.deltaTime);
             }
             else
                 Shot();
         }
-        // if (!hitUp)
-        // {
-        //     transform.Translate(Vector2.up * GameManager.Speed * Time.deltaTime);
-        // }
-        // else if (!hitDown)
-        // {
-        //     transform.Translate(Vector2.down * GameManager.Speed * Time.deltaTime);
-        // }
-        // else
-        // {
-        //     Shot();
-        // }
     }
 
     void Shot()
@@ -135,7 +142,7 @@ public class Aircraft : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.GetComponent<BodyPart>())
+        if (other.GetComponent<BodyPart>())
             GameManager.Instance.GameOver();
     }
 

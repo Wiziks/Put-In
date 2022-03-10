@@ -27,7 +27,7 @@ public class Missle : Weapon
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public override void DivStrength()
     {
         Activate();
     }

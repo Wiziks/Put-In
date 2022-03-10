@@ -105,7 +105,16 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   _strenght: 20
   _sprite: {fileID: 4969539462242918159}
-  _price: 150
+  _price: 0
+  EventOnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnStand:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
   Collider: {fileID: 2347945824980345679}
 --- !u!61 &2347945824980345679
 BoxCollider2D:

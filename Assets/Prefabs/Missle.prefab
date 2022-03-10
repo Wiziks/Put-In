@@ -160,7 +160,16 @@ MonoBehaviour:
   _size: {x: 1, y: 2}
   _strenght: 1
   _sprite: {fileID: 5879415139260491291}
-  _price: 1000
+  _price: 0
+  EventOnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnStand:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
   Collider: {fileID: 5879415138928268735}
   _speed: 0.1
   _explosionEffect: {fileID: 5879415138716945050}

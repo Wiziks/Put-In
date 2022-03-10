@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AircraftBullet : MonoBehaviour
 {
+    [SerializeField] private GameObject _explosionEffect;
+    [SerializeField] private SpriteRenderer _model;
     private float speed;
     private Vector2 direction;
     private new Rigidbody2D rigidbody2D;
@@ -29,16 +31,26 @@ public class AircraftBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.GetComponent<Weapon>())
+        if (other.gameObject.GetComponent<Weapon>() || other.gameObject.GetComponent<Wall>())
         {
-            Destroy(other.gameObject);
+            if (other.gameObject.GetComponent<Weapon>())
+                Destroy(other.gameObject);
             rigidbody2D.bodyType = RigidbodyType2D.Static;
-            gameObject.SetActive(false);
+            Activate();
         }
-        else if (other.gameObject.GetComponent<Wall>())
-        {
-            rigidbody2D.bodyType = RigidbodyType2D.Static;
-            gameObject.SetActive(false);
-        }
+    }
+
+    void Activate()
+    {
+        _model.enabled = false;
+        _explosionEffect.SetActive(true);
+        Invoke(nameof(TurnOff), 1f);
+    }
+
+    void TurnOff()
+    {
+        _model.enabled = true;
+        _explosionEffect.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

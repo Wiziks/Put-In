@@ -23,6 +23,7 @@ public class BodyPart : MonoBehaviour
         if (takeDamage)
         {
             GameManager.Instance.AddScore(takeDamage.GetKoeficient(), _damageMultiplier, transform.position);
+            takeDamage.DivStrength();
             return;
         }
 

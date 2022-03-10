@@ -152,7 +152,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             for (int j = 0; j < _currentWeapon.GetSize().y; j++)
             {
-                GameManager.Instance.WeaponDictionary.Add(new Vector2Int((int)x + i, (int)y + j), _currentWeapon);
+                GameManager.Instance.WeaponDictionary.Add(new Vector2(x + i, y + j), _currentWeapon);
             }
         }
         _currentWeapon.transform.position = new Vector2(x, y);

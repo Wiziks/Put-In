@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private PlaceType _placeType;
     [SerializeField] private Vector2Int _size = new Vector2Int(1, 1);
     [SerializeField] protected int _strenght = 1;
-    [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] protected SpriteRenderer _sprite;
     [SerializeField] private int _price;
     [SerializeField] private UnityEvent EventOnStart;
     [SerializeField] private UnityEvent EventOnStand;
@@ -38,17 +38,6 @@ public class Weapon : MonoBehaviour
         else
             isActive = false;
         EventOnStart.Invoke();
-    }
-
-    void Update()
-    {
-        if (_placeType == PlaceType.Walls)
-        {
-            if (transform.position.x > 0)
-                _sprite.flipY = true;
-            else
-                _sprite.flipY = false;
-        }
     }
 
     public float GetKoeficient() { return _damageKoeficient; }

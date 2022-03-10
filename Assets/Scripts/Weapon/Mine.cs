@@ -8,10 +8,9 @@ public class Mine : Weapon
     [SerializeField] private GameObject _forceObject;
     [SerializeField] private SpriteRenderer _model;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public override void DivStrength()
     {
-        if (other.gameObject.GetComponent<BodyPart>())
-            Activate();
+        Activate();
     }
 
     public void Activate()
