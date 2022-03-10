@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u0411\u0443\u043C\u0435\u0440\u0430\u043D\u0433"
   _cost: 0
-  _damageKoeficient: 5
+  _damageKoeficient: 15
   _placeType: 0
   _size: {x: 1, y: 1}
   _strenght: 25

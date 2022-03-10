@@ -25,6 +25,7 @@ public class Aircraft : MonoBehaviour
 
     void Start()
     {
+
         Instance = this;
         this.enabled = false;
     }

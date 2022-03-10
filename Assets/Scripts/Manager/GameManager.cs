@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Aircraft Speed")]
     [SerializeField] private float _startSpeed = 0.5f;
     public float Speed { get; private set; }
+    private float delta = 0.0001f;
 
     [Header("Game Panels")]
     [SerializeField] private GameObject _winPanel;
@@ -34,8 +35,23 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
 
+    private string startSpeedSave = "StartSpeedSave";
+    private string deltaSpeedSave = "StartSpeedSave";
+
+    private float scoreMultiplier = 10f;
+    private string scoreMultiplierSave = "ScoreMultiplierSave";
+
     void Start()
     {
+        if (PlayerPrefs.HasKey(startSpeedSave))
+            _startSpeed = PlayerPrefs.GetFloat(startSpeedSave);
+
+        if (PlayerPrefs.HasKey(deltaSpeedSave))
+            delta = PlayerPrefs.GetFloat(deltaSpeedSave);
+
+        if (PlayerPrefs.HasKey(scoreMultiplierSave))
+            scoreMultiplier = PlayerPrefs.GetFloat(scoreMultiplierSave);
+
         Instance = this;
         _scoreText.enabled = true;
         Time.timeScale = 1f;
@@ -47,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            Speed += 0.0001f;
+            Speed += delta;
             yield return null;
         }
     }
@@ -61,7 +77,7 @@ public class GameManager : MonoBehaviour
         score += currentScore;
 
         rawScore += currentScore;
-        if (rawScore % 10 == 0)
+        if (rawScore % scoreMultiplier == 0)
         {
             Resource.Instance.ChangeValue(1);
         }
@@ -166,4 +182,29 @@ public class GameManager : MonoBehaviour
 
     [ContextMenu("Delete all")]
     public void DeleteAll() { PlayerPrefs.DeleteAll(); }
+
+    public void SetStartSpeed(string value)
+    {
+        float.TryParse(value, out _startSpeed);
+        PlayerPrefs.SetFloat(startSpeedSave, _startSpeed);
+        PlayerPrefs.Save();
+    }
+
+    public void SetDeltaSpeed(string value)
+    {
+        float.TryParse(value, out delta);
+        PlayerPrefs.SetFloat(deltaSpeedSave, delta);
+        PlayerPrefs.Save();
+    }
+
+    public void SetScoreMultiplier(string value)
+    {
+        float.TryParse(value, out scoreMultiplier);
+        PlayerPrefs.SetFloat(scoreMultiplierSave, scoreMultiplier);
+        PlayerPrefs.Save();
+    }
+
+    public float GetStartSpeed() { return _startSpeed; }
+    public float GetDeltaSpeed() { return delta; }
+    public float GetScoreMultiplier() { return scoreMultiplier; }
 }

@@ -28,15 +28,33 @@ public class Weapon : MonoBehaviour
     [SerializeField] private UnityEvent EventOnDestroy;
     public Collider2D Collider;
     private bool isActive;
-    private string nameOfSave;
+    private string nameOfSaveActive;
+    private string nameOfSaveCost;
+    private string nameOfSaveStrength;
+    private string nameOfSavePrice;
+    private string nameOfSaveDamage;
 
     void Start()
     {
-        nameOfSave = $"isActive{gameObject.name}";
-        if (PlayerPrefs.HasKey(nameOfSave))
-            isActive = PlayerPrefs.GetFloat(nameOfSave) == 1 ? true : false;
+        nameOfSaveActive = $"isActive{gameObject.name}";
+        nameOfSaveCost = $"cost{gameObject.name}";
+        nameOfSaveStrength = $"strenght{gameObject.name}";
+        nameOfSavePrice = $"price{gameObject.name}";
+        nameOfSaveDamage = $"Damage{gameObject.name}";
+
+        if (PlayerPrefs.HasKey(nameOfSaveActive))
+            isActive = PlayerPrefs.GetInt(nameOfSaveActive) == 1 ? true : false;
         else
             isActive = false;
+
+        if (PlayerPrefs.HasKey(nameOfSaveCost))
+            _cost = PlayerPrefs.GetInt(nameOfSaveCost);
+
+        if (PlayerPrefs.HasKey(nameOfSaveStrength))
+            _strenght = PlayerPrefs.GetInt(nameOfSaveStrength);
+
+        if (PlayerPrefs.HasKey(nameOfSavePrice))
+            _price = PlayerPrefs.GetInt(nameOfSavePrice);
         EventOnStart.Invoke();
     }
 
@@ -72,7 +90,7 @@ public class Weapon : MonoBehaviour
     public void Buy()
     {
         isActive = true;
-        PlayerPrefs.SetInt(nameOfSave, isActive ? 1 : 0);
+        PlayerPrefs.SetInt(nameOfSaveActive, isActive ? 1 : 0);
     }
 
 
@@ -81,6 +99,7 @@ public class Weapon : MonoBehaviour
     public int GetCost() { return _cost; }
     public int GetStrenght() { return _strenght; }
     public int GetPrice() { return _price; }
+    public float GetDamageKoeficient() { return _damageKoeficient; }
     public bool GetActive() { return isActive; }
 
     public void Stand()
@@ -92,6 +111,37 @@ public class Weapon : MonoBehaviour
     public void TurnOff()
     {
         isActive = false;
-        PlayerPrefs.SetInt(nameOfSave, isActive ? 1 : 0);
+        PlayerPrefs.SetInt(nameOfSaveActive, isActive ? 1 : 0);
+    }
+
+    public void SetCost(string value)
+    {
+        int.TryParse(value, out _cost);
+        PlayerPrefs.SetInt(nameOfSaveCost, _cost);
+        PlayerPrefs.Save();
+    }
+    public void SetStrenght(string value)
+    {
+        int.TryParse(value, out _strenght);
+        PlayerPrefs.SetInt(nameOfSaveStrength, _strenght);
+        PlayerPrefs.Save();
+    }
+    public void SetPrice(string value)
+    {
+        int.TryParse(value, out _price);
+        PlayerPrefs.SetInt(nameOfSavePrice, _price);
+        PlayerPrefs.Save();
+    }
+    public void SetDamageKoeficient(string value)
+    {
+        float.TryParse(value, out _damageKoeficient);
+        PlayerPrefs.SetFloat(nameOfSaveDamage, _damageKoeficient);
+        PlayerPrefs.Save();
+    }
+    public void SetActive(bool value)
+    {
+        isActive = value;
+        PlayerPrefs.SetInt(nameOfSaveActive, isActive ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }

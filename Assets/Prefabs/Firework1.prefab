@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: 
   _cost: 0
-  _damageKoeficient: 10
+  _damageKoeficient: 30
   _placeType: 0
   _size: {x: 0, y: 0}
   _strenght: 1
