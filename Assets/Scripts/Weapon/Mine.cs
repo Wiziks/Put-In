@@ -18,6 +18,7 @@ public class Mine : Weapon
         _model.enabled = false;
         _explosionEffect.SetActive(true);
         _forceObject.SetActive(true);
+        AudioManager.Instance.PlaySoundExplosion();
         Destroy(gameObject, 1f);
     }
 }

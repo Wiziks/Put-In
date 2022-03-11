@@ -76,6 +76,7 @@ public class Weapon : MonoBehaviour
     }
     void OnDestroy()
     {
+        AudioManager.Instance.PlaySoundBreake();
         EventOnDestroy.Invoke();
         ClearDictionary();
     }

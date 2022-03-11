@@ -30,6 +30,7 @@ public class Fireworks : Weapon
         _model.enabled = false;
         _explosionEffect.SetActive(true);
         _forceObject.SetActive(true);
+        AudioManager.Instance.PlaySoundExplosion();
         Destroy(gameObject, 1f);
     }
     bool launch;
@@ -46,9 +47,10 @@ public class Fireworks : Weapon
     }
 
     public void Setup(float speed, float lerpRate)
-        {
-            this.speed = speed;
-            this.lerpRate = lerpRate;
-            launch = true;
-        }
+    {
+        this.speed = speed;
+        this.lerpRate = lerpRate;
+        launch = true;
+        AudioManager.Instance.PlaySoundLaunch();
     }
+}

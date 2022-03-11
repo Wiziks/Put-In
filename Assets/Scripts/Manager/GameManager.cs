@@ -83,23 +83,27 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateScore();
-        DamageText.Instance.ShowDamage(currentScore, point);
+        ParticleText.Instance.ShowTextParticles(currentScore, point);
     }
 
     public bool TryBuy(int price)
     {
         if (score < price)
+        {
+            AudioManager.Instance.PlaySoundNEM();
+            InformationText.Instance.Activate();
             return false;
+        }
         score -= price;
         UpdateScore();
         return true;
     }
 
-    private void WinGame()
-    {
-        Body.Instance.FallApart();
-        Invoke(nameof(ShowWinPanel), 1f);
-    }
+    // private void WinGame()
+    // {
+    //     Body.Instance.FallApart();
+    //     Invoke(nameof(ShowWinPanel), 1f);
+    // }
 
     private void ShowWinPanel()
     {
@@ -207,4 +211,15 @@ public class GameManager : MonoBehaviour
     public float GetStartSpeed() { return _startSpeed; }
     public float GetDeltaSpeed() { return delta; }
     public float GetScoreMultiplier() { return scoreMultiplier; }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0f;
+        AudioManager.Instance.StopMusic();
+    }
+    public void ContinueGame()
+    {
+        Time.timeScale = 1f;
+        AudioManager.Instance.ContinueMusic();
+    }
 }

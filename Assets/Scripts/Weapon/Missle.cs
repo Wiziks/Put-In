@@ -21,6 +21,7 @@ public class Missle : Weapon
                 if (hit.rigidbody.GetComponent<BodyPart>())
                 {
                     ClearDictionary();
+                    AudioManager.Instance.PlaySoundLaunch();
                     launch = true;
                     Destroy(gameObject, 5f);
                 }
@@ -37,5 +38,6 @@ public class Missle : Weapon
         _model.enabled = false;
         _explosionEffect.SetActive(true);
         _forceObject.SetActive(true);
+        AudioManager.Instance.PlaySoundExplosion();
     }
 }

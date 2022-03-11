@@ -18,13 +18,13 @@ public class Resource : MonoBehaviour
         {
             Coins = PlayerPrefs.GetInt(nameOfSave);
         }
-        _coinsText.text = $"Монет: {Coins}";
+        _coinsText.text = $"{Coins}";
     }
 
     public void ChangeValue(int value)
     {
         Coins += value;
-        _coinsText.text = $"Монет: {Coins}";
+        _coinsText.text = $"{Coins}";
         PlayerPrefs.SetInt(nameOfSave, Coins);
         PlayerPrefs.Save();
     }
@@ -32,9 +32,14 @@ public class Resource : MonoBehaviour
     public bool TryBuy(int price)
     {
         if (Coins < price)
+        {
+            AudioManager.Instance.PlaySoundNEM();
+            InformationText.Instance.Activate();
             return false;
+        }
         Coins -= price;
         ChangeValue(-price);
+        AudioManager.Instance.PlaySoundBuy();
         return true;
     }
 }

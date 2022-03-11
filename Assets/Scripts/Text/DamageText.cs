@@ -1,31 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class DamageText : MonoBehaviour
+public class DamageText : ParticleTextElement
 {
-    [SerializeField] private Camera _mainCamera;
-    [SerializeField] private int _poolCapacity = 5;
-    [SerializeField] private TextElement _textPrefab;
-    private TextElement[] textPool;
-    private int currentElement = 0;
-    public static DamageText Instance;
-    void Start()
+    public override void Activate(string text, Vector2 point)
     {
-        Instance = this;
-        textPool = new TextElement[_poolCapacity];
-        for (int i = 0; i < _poolCapacity; i++)
-        {
-            textPool[i] = Instantiate(_textPrefab, transform);
-        }
+        textComponent.enabled = true;
+        textComponent.text = text;
+        rectTransform.position = point;
+        StartCoroutine(Moving());
     }
 
-    public void ShowDamage(float damage, Vector2 point)
+    protected override IEnumerator Moving()
     {
-        Vector2 target = _mainCamera.WorldToScreenPoint(point);
-        textPool[currentElement].Activate(damage.ToString(), target);
-        currentElement++;
-        if (currentElement == _poolCapacity)
-            currentElement = 0;
+        float alpha = 1f;
+        while (alpha >= 0)
+        {
+            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, alpha);
+            alpha -= 0.01f;
+            yield return null;
+        }
+        textComponent.enabled = false;
     }
 }

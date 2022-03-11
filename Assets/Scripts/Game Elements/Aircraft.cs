@@ -88,11 +88,19 @@ public class Aircraft : MonoBehaviour
         {
             if (hit1)
             {
-                if (hit1.collider.GetComponent<CircleSelector>()) return;
+                if (hit1.collider.GetComponent<CircleSelector>())
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, target.position, speedMultiplier * GameManager.Instance.Speed * Time.deltaTime);
+                    return;
+                }
             }
             else if (hit2)
             {
-                if (hit2.collider.GetComponent<CircleSelector>()) return;
+                if (hit2.collider.GetComponent<CircleSelector>())
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, target.position, speedMultiplier * GameManager.Instance.Speed * Time.deltaTime);
+                    return;
+                }
             }
             AvoidObstacle();
 

@@ -28,14 +28,14 @@ public class Body : MonoBehaviour
             bodyPart.BecomeDynamic();
     }
 
-    public void FallApart()
-    {
-        foreach (HingeJoint2D springJoint in jointsToApart)
-        {
-            springJoint.breakForce = 0f;
-            springJoint.breakTorque = 0f;
-        }
-    }
+    // public void FallApart()
+    // {
+    //     foreach (HingeJoint2D springJoint in jointsToApart)
+    //     {
+    //         springJoint.breakForce = 0f;
+    //         springJoint.breakTorque = 0f;
+    //     }
+    // }
 
     IEnumerator StartCutScene()
     {

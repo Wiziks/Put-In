@@ -24,12 +24,14 @@ public class BodyPart : MonoBehaviour
         {
             GameManager.Instance.AddScore(takeDamage.GetKoeficient(), _damageMultiplier, transform.position);
             takeDamage.DivStrength();
+            AudioManager.Instance.PlaySoundDamage();
             return;
         }
 
         Wall wall = other.gameObject.GetComponent<Wall>();
         if (wall)
         {
+            AudioManager.Instance.PlaySoundDamage();
             if (other.relativeVelocity.magnitude >= wall.GetBorderVelocity())
             {
                 GameManager.Instance.AddScore(wall.GetKoeficient(), _damageMultiplier, transform.position);

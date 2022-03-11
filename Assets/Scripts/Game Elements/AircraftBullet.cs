@@ -44,6 +44,7 @@ public class AircraftBullet : MonoBehaviour
     {
         _model.enabled = false;
         _explosionEffect.SetActive(true);
+        AudioManager.Instance.PlaySoundExplosion();
         Invoke(nameof(TurnOff), 1f);
     }
 
