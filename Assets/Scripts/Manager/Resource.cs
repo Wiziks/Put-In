@@ -40,6 +40,7 @@ public class Resource : MonoBehaviour
         Coins -= price;
         ChangeValue(-price);
         AudioManager.Instance.PlaySoundBuy();
+        SnapScrolling.Instance.RefreshAll();
         return true;
     }
 }

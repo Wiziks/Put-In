@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Vector2Int _size = new Vector2Int(1, 1);
     [SerializeField] protected int _strenght = 1;
     [SerializeField] protected SpriteRenderer _sprite;
-    [SerializeField] private int _price;
+    [SerializeField] private int _scoreToUnlock;
     [SerializeField] private UnityEvent EventOnStart;
     [SerializeField] private UnityEvent EventOnStand;
     [SerializeField] private UnityEvent EventOnDestroy;
@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
     private string nameOfSaveActive;
     private string nameOfSaveCost;
     private string nameOfSaveStrength;
-    private string nameOfSavePrice;
+    private string nameOfSaveScore;
     private string nameOfSaveDamage;
 
     void Start()
@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
         nameOfSaveActive = $"isActive{gameObject.name}";
         nameOfSaveCost = $"cost{gameObject.name}";
         nameOfSaveStrength = $"strenght{gameObject.name}";
-        nameOfSavePrice = $"price{gameObject.name}";
+        nameOfSaveScore = $"score{gameObject.name}";
         nameOfSaveDamage = $"Damage{gameObject.name}";
 
         if (PlayerPrefs.HasKey(nameOfSaveActive))
@@ -53,8 +53,8 @@ public class Weapon : MonoBehaviour
         if (PlayerPrefs.HasKey(nameOfSaveStrength))
             _strenght = PlayerPrefs.GetInt(nameOfSaveStrength);
 
-        if (PlayerPrefs.HasKey(nameOfSavePrice))
-            _price = PlayerPrefs.GetInt(nameOfSavePrice);
+        if (PlayerPrefs.HasKey(nameOfSaveScore))
+            _scoreToUnlock = PlayerPrefs.GetInt(nameOfSaveScore);
         EventOnStart.Invoke();
     }
 
@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
     public string GetName() { return _name; }
     public int GetCost() { return _cost; }
     public int GetStrenght() { return _strenght; }
-    public int GetPrice() { return _price; }
+    public int GetPrice() { return _scoreToUnlock; }
     public float GetDamageKoeficient() { return _damageKoeficient; }
     public bool GetActive() { return isActive; }
 
@@ -120,29 +120,34 @@ public class Weapon : MonoBehaviour
         int.TryParse(value, out _cost);
         PlayerPrefs.SetInt(nameOfSaveCost, _cost);
         PlayerPrefs.Save();
+        SnapScrolling.Instance.RefreshAll();
     }
     public void SetStrenght(string value)
     {
         int.TryParse(value, out _strenght);
         PlayerPrefs.SetInt(nameOfSaveStrength, _strenght);
         PlayerPrefs.Save();
+        SnapScrolling.Instance.RefreshAll();
     }
     public void SetPrice(string value)
     {
-        int.TryParse(value, out _price);
-        PlayerPrefs.SetInt(nameOfSavePrice, _price);
+        int.TryParse(value, out _scoreToUnlock);
+        PlayerPrefs.SetInt(nameOfSaveScore, _scoreToUnlock);
         PlayerPrefs.Save();
+        SnapScrolling.Instance.RefreshAll();
     }
     public void SetDamageKoeficient(string value)
     {
         float.TryParse(value, out _damageKoeficient);
         PlayerPrefs.SetFloat(nameOfSaveDamage, _damageKoeficient);
         PlayerPrefs.Save();
+        SnapScrolling.Instance.RefreshAll();
     }
     public void SetActive(bool value)
     {
         isActive = value;
         PlayerPrefs.SetInt(nameOfSaveActive, isActive ? 1 : 0);
         PlayerPrefs.Save();
+        SnapScrolling.Instance.RefreshAll();
     }
 }

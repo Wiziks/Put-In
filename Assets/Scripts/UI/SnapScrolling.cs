@@ -38,6 +38,7 @@ public class SnapScrolling : MonoBehaviour
         {
             instPans[i] = Instantiate(panPrefab, transform, false);
             instPans[i].transform.GetChild(0).GetComponent<Image>().sprite = _weapons[i].GetSprite();
+            SetSize(_weapons[i].GetSprite(), instPans[i].transform.GetChild(0).GetComponent<Image>());
             instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
             instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"Стоимость - {_weapons[i].GetCost()}";
             instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"Прочность - {_weapons[i].GetStrenght()}";
@@ -121,10 +122,25 @@ public class SnapScrolling : MonoBehaviour
             {
                 instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetPrice()}";
                 instPans[i].transform.GetChild(5).GetComponent<BuyButton>().SetWeapon(_weapons[i]);
-                instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(instPans[i].transform.GetChild(5).GetComponent<BuyButton>().TryBuy);
+                //instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(instPans[i].transform.GetChild(5).GetComponent<BuyButton>().TryBuy);
                 instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(Refresh);
                 instPans[i].transform.GetChild(5).gameObject.SetActive(true);
             }
+        }
+    }
+
+    public void SetSize(Sprite sprite, Image image)
+    {
+        float temp;
+        if (sprite.bounds.extents.x > sprite.bounds.extents.y)
+        {
+            temp = sprite.bounds.extents.y / sprite.bounds.extents.x;
+            image.rectTransform.sizeDelta = new Vector2(250, temp * 250);
+        }
+        else
+        {
+            temp = sprite.bounds.extents.x / sprite.bounds.extents.y;
+            image.rectTransform.sizeDelta = new Vector2(temp * 250, 250);
         }
     }
 }
