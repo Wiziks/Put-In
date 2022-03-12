@@ -17,6 +17,11 @@ public class BodyPart : MonoBehaviour
         _rigidbody2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
+    public void BecomeStatic()
+    {
+        _rigidbody2D.velocity = Vector2.zero;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         Weapon takeDamage = other.gameObject.GetComponent<Weapon>();

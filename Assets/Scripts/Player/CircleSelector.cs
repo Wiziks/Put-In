@@ -6,6 +6,7 @@ public class CircleSelector : MonoBehaviour
 {
     [SerializeField] private BodyPart _majorBodyPart;
     public static CircleSelector Instance;
+    [SerializeField] public Vector3 StartPosition;
     void Start()
     {
         Instance = this;

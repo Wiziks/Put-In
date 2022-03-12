@@ -28,6 +28,12 @@ public class Body : MonoBehaviour
             bodyPart.BecomeDynamic();
     }
 
+    public void BecomeStatic()
+    {
+        foreach (BodyPart bodyPart in bodyParts)
+            bodyPart.BecomeStatic();
+    }
+
     // public void FallApart()
     // {
     //     foreach (HingeJoint2D springJoint in jointsToApart)

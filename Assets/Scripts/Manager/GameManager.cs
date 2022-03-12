@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Panels")]
     [SerializeField] private GameObject _losePanel;
+    [SerializeField] private TextMeshProUGUI _finalScoreText;
     public static GameManager Instance;
 
     [Header("Editing World")]
@@ -118,7 +119,18 @@ public class GameManager : MonoBehaviour
     {
         Resource.Instance.SaveMaxValue((int)score);
         _losePanel.SetActive(true);
+        _finalScoreText.text = $"Текущий счёт: {(int)score}";
+        Body.Instance.BecomeStatic();
         Time.timeScale = 0f;
+    }
+
+    public void ContinueGame()
+    {
+        Time.timeScale = 1f;
+        _losePanel.SetActive(false);
+        CircleSelector.Instance.GetBodyPart().transform.localPosition = CircleSelector.Instance.StartPosition;
+        Aircraft.Instance.transform.position = Aircraft.Instance.StartPosition;
+        Body.Instance.BecomeStatic();
     }
 
     [ContextMenu("Reload")]
@@ -216,12 +228,12 @@ public class GameManager : MonoBehaviour
     public float GetDeltaSpeed() { return delta; }
     public float GetScoreMultiplier() { return scoreMultiplier; }
 
-    public void StopGame()
+    public void PauseGame()
     {
         Time.timeScale = 0f;
         AudioManager.Instance.StopMusic();
     }
-    public void ContinueGame()
+    public void UnpauseGame()
     {
         Time.timeScale = 1f;
         AudioManager.Instance.ContinueMusic();

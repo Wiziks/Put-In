@@ -22,10 +22,12 @@ public class Aircraft : MonoBehaviour
     private Direction current;
     private float timer;
     public static Aircraft Instance;
+    public Vector3 StartPosition { private set; get; }
+
 
     void Start()
     {
-
+        StartPosition = transform.position;
         Instance = this;
         this.enabled = false;
     }
