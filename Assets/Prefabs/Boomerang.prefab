@@ -177,7 +177,7 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   _strenght: 25
   _sprite: {fileID: 1990572647}
-  _price: 0
+  _scoreToUnlock: 15000
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

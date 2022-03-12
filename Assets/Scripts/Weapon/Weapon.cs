@@ -47,14 +47,14 @@ public class Weapon : MonoBehaviour
         else
             isActive = false;
 
-        if (PlayerPrefs.HasKey(nameOfSaveCost))
-            _cost = PlayerPrefs.GetInt(nameOfSaveCost);
+        // if (PlayerPrefs.HasKey(nameOfSaveCost))
+        //     _cost = PlayerPrefs.GetInt(nameOfSaveCost);
 
-        if (PlayerPrefs.HasKey(nameOfSaveStrength))
-            _strenght = PlayerPrefs.GetInt(nameOfSaveStrength);
+        // if (PlayerPrefs.HasKey(nameOfSaveStrength))
+        //     _strenght = PlayerPrefs.GetInt(nameOfSaveStrength);
 
-        if (PlayerPrefs.HasKey(nameOfSaveScore))
-            _scoreToUnlock = PlayerPrefs.GetInt(nameOfSaveScore);
+        // if (PlayerPrefs.HasKey(nameOfSaveScore))
+        //     _scoreToUnlock = PlayerPrefs.GetInt(nameOfSaveScore);
         EventOnStart.Invoke();
     }
 

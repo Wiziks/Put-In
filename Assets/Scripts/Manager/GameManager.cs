@@ -42,20 +42,11 @@ public class GameManager : MonoBehaviour
     private string startSpeedSave = "StartSpeedSave";
     private string deltaSpeedSave = "StartSpeedSave";
 
-    private float scoreMultiplier = 2f;
+    private int scoreMultiplier = 2;
     private string scoreMultiplierSave = "ScoreMultiplierSave";
 
     void Start()
     {
-        if (PlayerPrefs.HasKey(startSpeedSave))
-            _startSpeed = PlayerPrefs.GetFloat(startSpeedSave);
-
-        if (PlayerPrefs.HasKey(deltaSpeedSave))
-            delta = PlayerPrefs.GetFloat(deltaSpeedSave);
-
-        if (PlayerPrefs.HasKey(scoreMultiplierSave))
-            scoreMultiplier = PlayerPrefs.GetFloat(scoreMultiplierSave);
-
         Instance = this;
         _scoreText.enabled = true;
         Time.timeScale = 1f;
@@ -79,8 +70,7 @@ public class GameManager : MonoBehaviour
         if (!Pointer.CheckHooked())
             currentScore *= 1.1f;
         score += currentScore;
-
-        if (score % scoreMultiplier == 0)
+        if ((int)score % scoreMultiplier == 0)
         {
             Resource.Instance.ChangeValue(1);
         }
@@ -217,8 +207,8 @@ public class GameManager : MonoBehaviour
 
     public void SetScoreMultiplier(string value)
     {
-        float.TryParse(value, out scoreMultiplier);
-        PlayerPrefs.SetFloat(scoreMultiplierSave, scoreMultiplier);
+        int.TryParse(value, out scoreMultiplier);
+        PlayerPrefs.SetInt(scoreMultiplierSave, scoreMultiplier);
         PlayerPrefs.Save();
     }
 

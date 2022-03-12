@@ -17,7 +17,7 @@ public class Resource : MonoBehaviour
         Coins = 0;
         Instance = this;
         _coinsText.text = $"{Coins}";
-        if(PlayerPrefs.HasKey(nameOfMaxScoreSave))
+        if (PlayerPrefs.HasKey(nameOfMaxScoreSave))
             _maxScoreText.text = $"Максимальный\nсчёт: {PlayerPrefs.GetInt(nameOfMaxScoreSave)}";
     }
 
@@ -35,16 +35,14 @@ public class Resource : MonoBehaviour
             InformationText.Instance.Activate();
             return false;
         }
-        Coins -= price;
         ChangeValue(-price);
         AudioManager.Instance.PlaySoundBuy();
-        SnapScrolling.Instance.RefreshAll();
         return true;
     }
 
     public void SaveMaxValue(int value)
     {
-        if(value > PlayerPrefs.GetInt(nameOfMaxScoreSave))
+        if (value > PlayerPrefs.GetInt(nameOfMaxScoreSave))
         {
             PlayerPrefs.SetInt(nameOfMaxScoreSave, value);
             PlayerPrefs.Save();
