@@ -14,7 +14,7 @@ enum EditState
 
 public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] private TextMeshProUGUI _priceText;
+    [SerializeField] private TextMeshProUGUI _costText;
     [SerializeField] private Weapon _prefab;
     private Weapon _currentWeapon;
     private new Camera camera;
@@ -27,7 +27,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void Start()
     {
         camera = Camera.main;
-        _priceText.text = _prefab.GetPrice().ToString();
+        _costText.text = _prefab.GetCost().ToString();
         followTarget = camera.GetComponent<CameraManager>();
         shopPanel = transform.parent.GetComponent<Image>();
     }
@@ -73,7 +73,7 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!GameManager.Instance.TryBuy(_prefab.GetCost())) return;
+        if (!Resource.Instance.TryBuy(_prefab.GetCost())) return;
 
         editState = EditState.Buy;
         _currentWeapon = Instantiate(_prefab, GameManager.Instance.GetParent());

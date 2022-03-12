@@ -44,16 +44,11 @@ public class SnapScrolling : MonoBehaviour
             instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"Прочность - {_weapons[i].GetStrenght()}";
             if (_weapons[i].GetActive())
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Куплено";
-                instPans[i].transform.GetChild(5).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Открыто";
             }
             else
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetPrice()}";
-                instPans[i].transform.GetChild(5).GetComponent<BuyButton>().SetWeapon(_weapons[i]);
-                instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(instPans[i].transform.GetChild(5).GetComponent<BuyButton>().TryBuy);
-                instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(Refresh);
-                instPans[i].transform.GetChild(5).gameObject.SetActive(true);
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Откроется\nпри {_weapons[i].GetUnlockScore()}";
             }
             if (i == 0) continue;
             instPans[i].transform.localPosition = new Vector2(instPans[i - 1].transform.localPosition.x +
@@ -99,7 +94,7 @@ public class SnapScrolling : MonoBehaviour
             }
             else
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetPrice()}";
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetUnlockScore()}";
                 instPans[i].transform.GetChild(5).gameObject.SetActive(true);
             }
         }
@@ -115,16 +110,11 @@ public class SnapScrolling : MonoBehaviour
             instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"Прочность - {_weapons[i].GetStrenght()}";
             if (_weapons[i].GetActive())
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Куплено";
-                instPans[i].transform.GetChild(5).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Разблокировано";
             }
             else
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Цена: {_weapons[i].GetPrice()}";
-                instPans[i].transform.GetChild(5).GetComponent<BuyButton>().SetWeapon(_weapons[i]);
-                //instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(instPans[i].transform.GetChild(5).GetComponent<BuyButton>().TryBuy);
-                instPans[i].transform.GetChild(5).GetComponent<Button>().onClick.AddListener(Refresh);
-                instPans[i].transform.GetChild(5).gameObject.SetActive(true);
+                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"Откроется\nпри {_weapons[i].GetUnlockScore()}";
             }
         }
     }

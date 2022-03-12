@@ -6,27 +6,25 @@ using TMPro;
 public class Resource : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _coinsText;
+    [SerializeField] private TextMeshProUGUI _maxScoreText;
     public static int Coins { get; private set; }
-    private static string nameOfSave = "ResourceCoins";
+    public string nameOfMaxScoreSave { get; } = "MaxScoreValueSave";
     public static Resource Instance;
+
 
     void Start()
     {
         Coins = 0;
         Instance = this;
-        if (PlayerPrefs.HasKey(nameOfSave))
-        {
-            Coins = PlayerPrefs.GetInt(nameOfSave);
-        }
         _coinsText.text = $"{Coins}";
+        if(PlayerPrefs.HasKey(nameOfMaxScoreSave))
+            _maxScoreText.text = $"Максимальный\nсчёт: {PlayerPrefs.GetInt(nameOfMaxScoreSave)}";
     }
 
     public void ChangeValue(int value)
     {
         Coins += value;
         _coinsText.text = $"{Coins}";
-        PlayerPrefs.SetInt(nameOfSave, Coins);
-        PlayerPrefs.Save();
     }
 
     public bool TryBuy(int price)
@@ -42,5 +40,14 @@ public class Resource : MonoBehaviour
         AudioManager.Instance.PlaySoundBuy();
         SnapScrolling.Instance.RefreshAll();
         return true;
+    }
+
+    public void SaveMaxValue(int value)
+    {
+        if(value > PlayerPrefs.GetInt(nameOfMaxScoreSave))
+        {
+            PlayerPrefs.SetInt(nameOfMaxScoreSave, value);
+            PlayerPrefs.Save();
+        }
     }
 }

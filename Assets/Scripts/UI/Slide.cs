@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Slide : MonoBehaviour
 {
+    [SerializeField] private float _slideSpeed = 2000f;
     private RectTransform rectTransform;
     private Vector2 startPosition;
     bool inGame;
@@ -24,7 +25,7 @@ public class Slide : MonoBehaviour
         Vector2 targetVector = new Vector2(rectTransform.position.x, y);
         while (Mathf.Abs(rectTransform.position.y) != Mathf.Abs(y))
         {
-            rectTransform.position = Vector2.MoveTowards(transform.position, targetVector, Time.deltaTime * 2000f);
+            rectTransform.position = Vector2.MoveTowards(transform.position, targetVector, Time.deltaTime * _slideSpeed);
             yield return null;
         }
         rectTransform.position = targetVector;

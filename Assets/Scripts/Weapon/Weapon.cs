@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
     private string nameOfSaveScore;
     private string nameOfSaveDamage;
 
-    void Start()
+    void Awake()
     {
         nameOfSaveActive = $"isActive{gameObject.name}";
         nameOfSaveCost = $"cost{gameObject.name}";
@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
     public string GetName() { return _name; }
     public int GetCost() { return _cost; }
     public int GetStrenght() { return _strenght; }
-    public int GetPrice() { return _scoreToUnlock; }
+    public int GetUnlockScore() { return _scoreToUnlock; }
     public float GetDamageKoeficient() { return _damageKoeficient; }
     public bool GetActive() { return isActive; }
 
@@ -120,34 +120,39 @@ public class Weapon : MonoBehaviour
         int.TryParse(value, out _cost);
         PlayerPrefs.SetInt(nameOfSaveCost, _cost);
         PlayerPrefs.Save();
-        SnapScrolling.Instance.RefreshAll();
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
     }
     public void SetStrenght(string value)
     {
         int.TryParse(value, out _strenght);
         PlayerPrefs.SetInt(nameOfSaveStrength, _strenght);
         PlayerPrefs.Save();
-        SnapScrolling.Instance.RefreshAll();
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
     }
-    public void SetPrice(string value)
+    public void SetUnlockScore(string value)
     {
         int.TryParse(value, out _scoreToUnlock);
         PlayerPrefs.SetInt(nameOfSaveScore, _scoreToUnlock);
         PlayerPrefs.Save();
-        SnapScrolling.Instance.RefreshAll();
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
     }
     public void SetDamageKoeficient(string value)
     {
         float.TryParse(value, out _damageKoeficient);
         PlayerPrefs.SetFloat(nameOfSaveDamage, _damageKoeficient);
         PlayerPrefs.Save();
-        SnapScrolling.Instance.RefreshAll();
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
     }
     public void SetActive(bool value)
     {
         isActive = value;
         PlayerPrefs.SetInt(nameOfSaveActive, isActive ? 1 : 0);
         PlayerPrefs.Save();
-        SnapScrolling.Instance.RefreshAll();
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
     }
 }

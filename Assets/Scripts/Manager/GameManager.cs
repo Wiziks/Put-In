@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI _scoreText;
     float score;
-    float rawScore;
 
     [Header("Aircraft Speed")]
     [SerializeField] private float _startSpeed = 0.5f;
@@ -18,7 +17,6 @@ public class GameManager : MonoBehaviour
     private float delta = 0.0001f;
 
     [Header("Game Panels")]
-    [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
     public static GameManager Instance;
 
@@ -32,13 +30,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _horizontalBorder = 6.5f;
     [SerializeField] private float _verticalBorder = 5.5f;
 
+    [Header("Weapons")]
+    [SerializeField] private Weapon[] _weapons;
+    [SerializeField] private Slide _slidePanel;
+    [SerializeField] private Image _imageUnlockWeapon;
+    [SerializeField] private TextMeshProUGUI _nameUnlockWeapon;
+
 
     public Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
 
     private string startSpeedSave = "StartSpeedSave";
     private string deltaSpeedSave = "StartSpeedSave";
 
-    private float scoreMultiplier = 10f;
+    private float scoreMultiplier = 2f;
     private string scoreMultiplierSave = "ScoreMultiplierSave";
 
     void Start()
@@ -76,43 +80,53 @@ public class GameManager : MonoBehaviour
             currentScore *= 1.1f;
         score += currentScore;
 
-        rawScore += currentScore;
-        if (rawScore % scoreMultiplier == 0)
+        if (score % scoreMultiplier == 0)
         {
             Resource.Instance.ChangeValue(1);
         }
-
+        foreach (Weapon weapon in _weapons)
+        {
+            if (!weapon.GetActive())
+            {
+                if (score >= weapon.GetUnlockScore())
+                {
+                    weapon.SetActive(true);
+                    ShowUnlockPanel(weapon);
+                }
+            }
+        }
         UpdateScore();
         ParticleText.Instance.ShowTextParticles(currentScore, point);
     }
 
-    public bool TryBuy(int price)
+    [ContextMenu("Show Unlock Panel")]
+    public void ShowUnlockPanel(Weapon weapon)
     {
-        if (score < price)
+        _imageUnlockWeapon.sprite = weapon.GetSprite();
+        float temp;
+        if (_imageUnlockWeapon.sprite.bounds.extents.x > _imageUnlockWeapon.sprite.bounds.extents.y)
         {
-            AudioManager.Instance.PlaySoundNEM();
-            InformationText.Instance.Activate();
-            return false;
+            temp = _imageUnlockWeapon.sprite.bounds.extents.y / _imageUnlockWeapon.sprite.bounds.extents.x;
+            _imageUnlockWeapon.rectTransform.sizeDelta = new Vector2(75, temp * 75);
         }
-        score -= price;
-        UpdateScore();
-        return true;
+        else
+        {
+            temp = _imageUnlockWeapon.sprite.bounds.extents.x / _imageUnlockWeapon.sprite.bounds.extents.y;
+            _imageUnlockWeapon.rectTransform.sizeDelta = new Vector2(temp * 75, 75);
+        }
+        _nameUnlockWeapon.text = $"<b>Разблокировано</b>\n{weapon.GetName()}";
+        _slidePanel.Sliding(1080);
+        Invoke(nameof(HideSlidePanel), 3f);
     }
 
-    // private void WinGame()
-    // {
-    //     Body.Instance.FallApart();
-    //     Invoke(nameof(ShowWinPanel), 1f);
-    // }
-
-    private void ShowWinPanel()
+    void HideSlidePanel()
     {
-        _winPanel.SetActive(true);
-        Time.timeScale = 0f;
+        _slidePanel.Sliding(1180);
     }
 
     public void GameOver()
     {
+        Resource.Instance.SaveMaxValue((int)score);
         _losePanel.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -125,7 +139,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateScore()
     {
-        _scoreText.text = $"Прогрес:{(int)score}";
+        _scoreText.text = $"Счёт: {(int)score}";
     }
 
     public Transform GetParent() { return _obstacles; }

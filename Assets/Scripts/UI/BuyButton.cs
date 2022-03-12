@@ -13,7 +13,7 @@ public class BuyButton : MonoBehaviour
 
     public void TryBuy()
     {
-        if (!Resource.Instance.TryBuy(weaponToBuy.GetPrice())) return;
+        if (!Resource.Instance.TryBuy(weaponToBuy.GetUnlockScore())) return;
 
         SnapScrolling.Instance.Refresh();
         weaponToBuy.Buy();

@@ -56,7 +56,7 @@ public class DebugButton : MonoBehaviour
             }
             else if (type == Type.Price)
             {
-                inputField.text = weapon.GetPrice().ToString();
+                inputField.text = weapon.GetUnlockScore().ToString();
             }
             else if (type == Type.DamageKoeficient)
             {
