@@ -4969,8 +4969,8 @@ MonoBehaviour:
   _nameUkr: "\u0420\u0430\u043A\u0435\u0442\u0430"
   _nameRus: "\u0420\u0430\u043A\u0435\u0442\u0430"
   _nameEng: Missile
-  _cost: 0
-  _damageKoeficient: 25
+  _cost: 250
+  _damageKoeficient: 75
   _placeType: 3
   _size: {x: 1, y: 2}
   _strenght: 1

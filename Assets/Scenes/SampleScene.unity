@@ -4873,7 +4873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 862815765}
-  _startSpeed: 0.5
+  _startSpeed: 1
   _losePanel: {fileID: 1942158168}
   _finalScoreText: {fileID: 759169597}
   _obstacles: {fileID: 1094363479}

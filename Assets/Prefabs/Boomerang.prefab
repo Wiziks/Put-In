@@ -173,8 +173,8 @@ MonoBehaviour:
   _nameUkr: "\u0411\u0443\u043C\u0435\u0440\u0430\u043D\u0433"
   _nameRus: "\u0411\u0443\u043C\u0430\u0440\u0430\u043D\u0433"
   _nameEng: Boomerang
-  _cost: 0
-  _damageKoeficient: 15
+  _cost: 150
+  _damageKoeficient: 25
   _placeType: 0
   _size: {x: 1, y: 1}
   _strenght: 25

@@ -27,6 +27,12 @@ public class Resource : MonoBehaviour
         _coinsText.text = $"{Coins}";
     }
 
+    public void SetValue(int value)
+    {
+        Coins = value;
+        _coinsText.text = $"{Coins}";
+    }
+
     public bool TryBuy(int price)
     {
         if (Coins < price)
@@ -36,6 +42,7 @@ public class Resource : MonoBehaviour
             return false;
         }
         ChangeValue(-price);
+        GameManager.Instance.DivCoinScore(price);
         AudioManager.Instance.PlaySoundBuy();
         return true;
     }

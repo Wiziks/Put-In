@@ -40,6 +40,7 @@ public class Missle : Weapon
         _explosionEffect.SetActive(true);
         _forceObject.SetActive(true);
         _launchEffect.Stop();
+        ClearDictionary();
         AudioManager.Instance.PlaySoundExplosion();
     }
 }

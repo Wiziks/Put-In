@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
         {
             for (int j = 0; j < _size.y; j++)
             {
-                Vector2Int cell = new Vector2Int((int)transform.position.x + i, (int)transform.position.x + j);
+                Vector2 cell = new Vector2(transform.position.x + i, transform.position.y + j);
                 if (GameManager.Instance.WeaponDictionary.ContainsKey(cell))
                     GameManager.Instance.WeaponDictionary.Remove(cell);
             }

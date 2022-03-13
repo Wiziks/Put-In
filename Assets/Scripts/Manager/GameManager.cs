@@ -10,11 +10,12 @@ public class GameManager : MonoBehaviour
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI _scoreText;
     float score;
+    float coinScore;
 
     [Header("Aircraft Speed")]
     [SerializeField] private float _startSpeed = 0.5f;
     public float Speed { get; private set; }
-    private float delta = 0.0001f;
+    [SerializeField] private float delta = 0.0006f;
 
     [Header("Game Panels")]
     [SerializeField] private GameObject _losePanel;
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     private string startSpeedSave = "StartSpeedSave";
     private string deltaSpeedSave = "StartSpeedSave";
 
-    private int scoreMultiplier = 2;
+    private int scoreMultiplier = 4;
     private string scoreMultiplierSave = "ScoreMultiplierSave";
 
     void Start()
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Speed += delta;
-            yield return null;
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
     }
 
@@ -71,10 +72,8 @@ public class GameManager : MonoBehaviour
         if (!Pointer.CheckHooked())
             currentScore *= 1.1f;
         score += currentScore;
-        if ((int)score % scoreMultiplier == 0)
-        {
-            Resource.Instance.ChangeValue(1);
-        }
+        coinScore += currentScore;
+        Resource.Instance.SetValue((int)(coinScore / scoreMultiplier));
         foreach (Weapon weapon in _weapons)
         {
             if (!weapon.GetActive())
@@ -237,5 +236,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         AudioManager.Instance.ContinueMusic();
+    }
+
+    public void DivCoinScore(int value)
+    {
+        coinScore -= value * scoreMultiplier;
     }
 }

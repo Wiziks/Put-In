@@ -102,11 +102,11 @@ MonoBehaviour:
   _nameUkr: "\u041F\u0438\u043B\u043A\u0430"
   _nameRus: "\u041F\u0438\u043B\u0430"
   _nameEng: Saw
-  _cost: 1
-  _damageKoeficient: 2
+  _cost: 50
+  _damageKoeficient: 10
   _placeType: 0
   _size: {x: 1, y: 1}
-  _strenght: 5
+  _strenght: 50
   _sprite: {fileID: 2062717526421108466}
   _scoreToUnlock: 0
   EventOnStart:

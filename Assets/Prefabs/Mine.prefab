@@ -51,8 +51,8 @@ MonoBehaviour:
   _nameUkr: "\u041C\u0456\u043D\u0430"
   _nameRus: "\u041C\u0438\u043D\u0430"
   _nameEng: Mina
-  _cost: 5
-  _damageKoeficient: 10
+  _cost: 100
+  _damageKoeficient: 50
   _placeType: 3
   _size: {x: 1, y: 1}
   _strenght: 1
