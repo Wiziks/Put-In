@@ -74,6 +74,7 @@ public class AudioManager : MonoBehaviour
         _musicSource.Play();
     }
 
+
     public void PlayMusicInShop()
     {
         _musicSource.clip = _musicInShop;

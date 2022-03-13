@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f59995eebe296409ebc1ff5baac38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: "\u041D\u043E\u0436\u0438"
+  _nameUkr: "\u041D\u0456\u0436"
+  _nameRus: "\u041D\u043E\u0436"
+  _nameEng: Knife
   _cost: 0
   _damageKoeficient: 5
   _placeType: 1

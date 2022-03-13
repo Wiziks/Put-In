@@ -21,7 +21,7 @@ public class InformationText : MonoBehaviour
     }
     public void Activate()
     {
-        messageText.text = "Недостаточно монет...";
+        messageText.text = $"{Localization.Instance.GetRightPhase(3)}...";
         gameObject.SetActive(true);
         rect.position = Input.mousePosition;
         startPosition = rect.position;

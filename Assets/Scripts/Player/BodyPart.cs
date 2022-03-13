@@ -36,9 +36,9 @@ public class BodyPart : MonoBehaviour
         Wall wall = other.gameObject.GetComponent<Wall>();
         if (wall)
         {
-            AudioManager.Instance.PlaySoundDamage();
             if (other.relativeVelocity.magnitude >= wall.GetBorderVelocity())
             {
+                AudioManager.Instance.PlaySoundDamage();
                 GameManager.Instance.AddScore(wall.GetKoeficient(), _damageMultiplier, transform.position);
             }
         }

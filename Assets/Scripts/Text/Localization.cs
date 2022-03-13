@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public enum LanguageType
+public enum Language
 {
     Ukrainian,
     Russian,
     English
 }
+
+[System.Serializable] public class PhraseArray { public string[] PhraseType = new string[3]; }
 
 public class Localization : MonoBehaviour
 {
@@ -16,54 +19,88 @@ public class Localization : MonoBehaviour
     [SerializeField] private Sprite _rus;
     [SerializeField] private Sprite _eng;
     [SerializeField] private Image _changeButton;
-    private LanguageType languageType;
+    [SerializeField] private TextMeshProUGUI _settingsLabel;
+    [SerializeField] private TextMeshProUGUI _loseLabel;
+    [SerializeField] private TextMeshProUGUI _continueLabel;
+    [SerializeField] private TextMeshProUGUI _finishLabel;
+    private Language language;
     private string nameOfLanguageTypeSave = "LanguageTypeSave";
+    public static Localization Instance;
+
+    [SerializeField] private PhraseArray[] PhraseArray = new PhraseArray[8];
+
     void Start()
     {
+        Instance = this;
         if (PlayerPrefs.HasKey(nameOfLanguageTypeSave))
         {
             string language = PlayerPrefs.GetString(nameOfLanguageTypeSave);
             if (language == "Russian")
             {
-                languageType = LanguageType.Russian;
+                this.language = Language.Russian;
                 _changeButton.sprite = _rus;
             }
             else if (language == "English")
             {
-                languageType = LanguageType.English;
+                this.language = Language.English;
                 _changeButton.sprite = _eng;
             }
             else if (language == "Ukrainian")
             {
-                languageType = LanguageType.Ukrainian;
+                this.language = Language.Ukrainian;
                 _changeButton.sprite = _ukr;
             }
+            UpdateSettings();
+            UpdateLosePanel();
         }
     }
 
     public void ChangeLanguage()
     {
-        if (languageType == LanguageType.Ukrainian)
+        if (language == Language.Ukrainian)
         {
-            languageType = LanguageType.Russian;
+            language = Language.Russian;
             PlayerPrefs.SetString(nameOfLanguageTypeSave, "Russian");
             PlayerPrefs.Save();
             _changeButton.sprite = _rus;
         }
-        else if (languageType == LanguageType.Russian)
+        else if (language == Language.Russian)
         {
-            languageType = LanguageType.English;
+            language = Language.English;
             PlayerPrefs.SetString(nameOfLanguageTypeSave, "English");
             PlayerPrefs.Save();
             _changeButton.sprite = _eng;
         }
-        else if (languageType == LanguageType.English)
+        else if (language == Language.English)
         {
-            languageType = LanguageType.Ukrainian;
+            language = Language.Ukrainian;
             PlayerPrefs.SetString(nameOfLanguageTypeSave, "Ukrainian");
             PlayerPrefs.Save();
             _changeButton.sprite = _ukr;
         }
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
+        Resource.Instance.UpdateMaxScore();
+        UpdateSettings();
+        UpdateLosePanel();
+    }
 
+    public Language GetLanguage() { return language; }
+
+    public string GetRightPhase(int index)
+    {
+        return PhraseArray[index].PhraseType[(int)language];
+    }
+
+    void UpdateSettings()
+    {
+        _settingsLabel.text = $"{GetRightPhase(9)}";
+    }
+
+    void UpdateLosePanel()
+    {
+        _loseLabel.text = $"{GetRightPhase(10)}";
+        _continueLabel.text = $"{GetRightPhase(11)}";
+        _finishLabel.text = $"{GetRightPhase(12)}";
     }
 }

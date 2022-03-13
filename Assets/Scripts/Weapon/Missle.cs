@@ -8,6 +8,7 @@ public class Missle : Weapon
     [SerializeField] private GameObject _explosionEffect;
     [SerializeField] private GameObject _forceObject;
     [SerializeField] private SpriteRenderer _model;
+    [SerializeField] private ParticleSystem _launchEffect;
     private bool launch;
 
     private void FixedUpdate()
@@ -38,6 +39,7 @@ public class Missle : Weapon
         _model.enabled = false;
         _explosionEffect.SetActive(true);
         _forceObject.SetActive(true);
+        _launchEffect.Stop();
         AudioManager.Instance.PlaySoundExplosion();
     }
 }

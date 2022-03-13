@@ -18,7 +18,7 @@ public class Resource : MonoBehaviour
         Instance = this;
         _coinsText.text = $"{Coins}";
         if (PlayerPrefs.HasKey(nameOfMaxScoreSave))
-            _maxScoreText.text = $"Максимальный\nсчёт: {PlayerPrefs.GetInt(nameOfMaxScoreSave)}";
+            UpdateMaxScore();
     }
 
     public void ChangeValue(int value)
@@ -46,6 +46,12 @@ public class Resource : MonoBehaviour
         {
             PlayerPrefs.SetInt(nameOfMaxScoreSave, value);
             PlayerPrefs.Save();
+            UpdateMaxScore();
         }
+    }
+
+    public void UpdateMaxScore()
+    {
+        _maxScoreText.text = $"{Localization.Instance.GetRightPhase(2)}: {PlayerPrefs.GetInt(nameOfMaxScoreSave)}";
     }
 }

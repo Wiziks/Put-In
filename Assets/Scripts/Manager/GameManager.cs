@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             temp = _imageUnlockWeapon.sprite.bounds.extents.x / _imageUnlockWeapon.sprite.bounds.extents.y;
             _imageUnlockWeapon.rectTransform.sizeDelta = new Vector2(temp * 75, 75);
         }
-        _nameUnlockWeapon.text = $"<b>Разблокировано</b>\n{weapon.GetName()}";
+        _nameUnlockWeapon.text = $"<b>{Localization.Instance.GetRightPhase(8)}</b>\n{weapon.GetName()}";
         _slidePanel.Sliding(1080);
         Invoke(nameof(HideSlidePanel), 3f);
     }
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         Resource.Instance.SaveMaxValue((int)score);
         _losePanel.SetActive(true);
-        _finalScoreText.text = $"Текущий счёт: {(int)score}";
+        _finalScoreText.text = $"{Localization.Instance.GetRightPhase(1)}: {(int)score}";
         Body.Instance.BecomeStatic();
         Time.timeScale = 0f;
     }
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateScore()
     {
-        _scoreText.text = $"Счёт: {(int)score}";
+        _scoreText.text = $"{Localization.Instance.GetRightPhase(0)}: {(int)score}";
     }
 
     public Transform GetParent() { return _obstacles; }

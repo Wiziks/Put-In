@@ -48,7 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272a15e7e3948f44bbcdf1a2c95dea7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: "\u041C\u0438\u043D\u0430"
+  _nameUkr: "\u041C\u0456\u043D\u0430"
+  _nameRus: "\u041C\u0438\u043D\u0430"
+  _nameEng: Mina
   _cost: 5
   _damageKoeficient: 10
   _placeType: 3

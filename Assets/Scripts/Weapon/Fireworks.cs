@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// [RequireComponent(typeof(Rigidbody2D))]
 public class Fireworks : Weapon
 {
     [SerializeField] private GameObject _explosionEffect;
     [SerializeField] private GameObject _forceObject;
     [SerializeField] private SpriteRenderer _model;
     [SerializeField] private Collider2D ignoreCollider;
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.GetComponent<Wall>()) return;
-    //     else if (other.GetComponent<Box>()) return;
-    //     else if (other.GetComponent<Fireworks>()) return;
-    //     else if (other.name == ignoreCollider.name) return;
-    //     Activate();
-    // }
+    [SerializeField] private ParticleSystem _launchParticles;
 
     public override void DivStrength()
     {
@@ -30,6 +21,7 @@ public class Fireworks : Weapon
         _model.enabled = false;
         _explosionEffect.SetActive(true);
         _forceObject.SetActive(true);
+        _launchParticles.Stop();
         AudioManager.Instance.PlaySoundExplosion();
         Destroy(gameObject, 1f);
     }

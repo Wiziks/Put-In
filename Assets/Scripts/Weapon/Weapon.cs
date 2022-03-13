@@ -15,7 +15,9 @@ public enum PlaceType
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private string _name;
+    [SerializeField] private string _nameUkr;
+    [SerializeField] private string _nameRus;
+    [SerializeField] private string _nameEng;
     [SerializeField] private int _cost;
     [SerializeField] private float _damageKoeficient = 1f;
     [SerializeField] private PlaceType _placeType;
@@ -37,24 +39,17 @@ public class Weapon : MonoBehaviour
     void Awake()
     {
         nameOfSaveActive = $"isActive{gameObject.name}";
-        nameOfSaveCost = $"cost{gameObject.name}";
-        nameOfSaveStrength = $"strenght{gameObject.name}";
-        nameOfSaveScore = $"score{gameObject.name}";
-        nameOfSaveDamage = $"Damage{gameObject.name}";
+        // nameOfSaveCost = $"cost{gameObject.name}";
+        // nameOfSaveStrength = $"strenght{gameObject.name}";
+        // nameOfSaveScore = $"score{gameObject.name}";
+        // nameOfSaveDamage = $"Damage{gameObject.name}";
 
         if (PlayerPrefs.HasKey(nameOfSaveActive))
             isActive = PlayerPrefs.GetInt(nameOfSaveActive) == 1 ? true : false;
         else
             isActive = false;
 
-        // if (PlayerPrefs.HasKey(nameOfSaveCost))
-        //     _cost = PlayerPrefs.GetInt(nameOfSaveCost);
 
-        // if (PlayerPrefs.HasKey(nameOfSaveStrength))
-        //     _strenght = PlayerPrefs.GetInt(nameOfSaveStrength);
-
-        // if (PlayerPrefs.HasKey(nameOfSaveScore))
-        //     _scoreToUnlock = PlayerPrefs.GetInt(nameOfSaveScore);
         EventOnStart.Invoke();
     }
 
@@ -96,7 +91,17 @@ public class Weapon : MonoBehaviour
 
 
     public Sprite GetSprite() { return _sprite.sprite; }
-    public string GetName() { return _name; }
+    public string GetName()
+    {
+        string name = "";
+        if (Localization.Instance.GetLanguage() == Language.Ukrainian)
+            name = _nameUkr;
+        else if (Localization.Instance.GetLanguage() == Language.Russian)
+            name = _nameRus;
+        else if (Localization.Instance.GetLanguage() == Language.English)
+            name = _nameEng;
+        return name;
+    }
     public int GetCost() { return _cost; }
     public int GetStrenght() { return _strenght; }
     public int GetUnlockScore() { return _scoreToUnlock; }

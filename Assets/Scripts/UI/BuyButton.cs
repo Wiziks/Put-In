@@ -15,7 +15,7 @@ public class BuyButton : MonoBehaviour
     {
         if (!Resource.Instance.TryBuy(weaponToBuy.GetUnlockScore())) return;
 
-        SnapScrolling.Instance.Refresh();
+        SnapScrolling.Instance.RefreshAll();
         weaponToBuy.Buy();
         gameObject.SetActive(false);
     }

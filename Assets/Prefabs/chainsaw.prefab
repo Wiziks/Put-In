@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03add62fbf8a74418fa56e1001f0985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: "\u041F\u0438\u043B\u0430"
+  _nameUkr: "\u041F\u0438\u043B\u043A\u0430"
+  _nameRus: "\u041F\u0438\u043B\u0430"
+  _nameEng: Saw
   _cost: 1
   _damageKoeficient: 2
   _placeType: 0
