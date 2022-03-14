@@ -41,7 +41,8 @@ public class Pointer : MonoBehaviour
                         Body.Instance.BecomeDynamic();
                         _instructionPanel.SetActive(false);
                         _gameManager.gameObject.SetActive(true);
-                        Aircraft.Instance.enabled = true;
+                        if (!TutorialScript.Instance)
+                            Aircraft.Instance.enabled = true;
                         ShopPanel.SetActive(true);
                         firstTime = true;
                     }

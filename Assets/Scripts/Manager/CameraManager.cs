@@ -9,12 +9,12 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance;
     bool reinitialized;
     Vector3 targetVector;
-    new Camera camera;
+    [HideInInspector] public Camera Camera;
 
     void Awake()
     {
         Instance = this;
-        camera = gameObject.GetComponent<Camera>();
+        Camera = gameObject.GetComponent<Camera>();
     }
 
     void LateUpdate()
@@ -46,14 +46,14 @@ public class CameraManager : MonoBehaviour
     IEnumerator Zooming(float zoomValue)
     {
         float rate = 0.1f;
-        if (camera.orthographicSize > zoomValue)
+        if (Camera.orthographicSize > zoomValue)
             rate *= -1;
-        int iterations = (int)((camera.orthographicSize - zoomValue) / rate);
+        int iterations = (int)((Camera.orthographicSize - zoomValue) / rate);
         for (int i = 0; i < iterations; i++)
         {
-            camera.orthographicSize += rate;
+            Camera.orthographicSize += rate;
             yield return null;
         }
-        camera.orthographicSize = zoomValue;
+        Camera.orthographicSize = zoomValue;
     }
 }

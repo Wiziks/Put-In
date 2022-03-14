@@ -29,7 +29,7 @@ public class Localization : MonoBehaviour
 
     [SerializeField] private PhraseArray[] PhraseArray = new PhraseArray[8];
 
-    void Start()
+    void Awake()
     {
         Instance = this;
         if (PlayerPrefs.HasKey(nameOfLanguageTypeSave))
@@ -53,6 +53,7 @@ public class Localization : MonoBehaviour
             UpdateSettings();
             UpdateLosePanel();
         }
+        this.language = Language.Russian;
     }
 
     public void ChangeLanguage()

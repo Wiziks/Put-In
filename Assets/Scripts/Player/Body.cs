@@ -14,7 +14,7 @@ public class Body : MonoBehaviour
     [SerializeField] private HingeJoint2D[] jointsToApart;
     public static Body Instance;
 
-    void Start()
+    void Awake()
     {
         Time.timeScale = 1f;
         Instance = this;

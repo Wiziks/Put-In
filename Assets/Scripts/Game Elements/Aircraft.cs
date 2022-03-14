@@ -30,6 +30,7 @@ public class Aircraft : MonoBehaviour
         StartPosition = transform.position;
         Instance = this;
         this.enabled = false;
+        speedMultiplier = 1f;
     }
 
     void Update()
@@ -154,7 +155,14 @@ public class Aircraft : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<BodyPart>())
-            GameManager.Instance.GameOver();
+        {
+            if (TutorialScript.Instance)
+            {
+                TutorialScript.Instance.phases = Phases.Four;
+            }
+            else
+                GameManager.Instance.GameOver();
+        }
     }
 
     public void SetSpeedMultiplier(float value)
