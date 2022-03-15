@@ -40,6 +40,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     [SerializeField] private TextMeshProUGUI[] _tutorialTexts;
     [SerializeField] private Image _tutorialImage;
+    [SerializeField] private Weapon _saw;
+    [SerializeField] private Button _ingameSettings;
 
     private bool needTutorial = false;
     private string keyName = "TutorialKey";
@@ -80,6 +82,10 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         canTap = true;
         _handRect.position = startBodyPosition;
         Pointer.Instance.gameObject.SetActive(true);
+        _hand.enabled = true;
+        _saw.SetActive(true);
+        AudioManager.Instance.SetMusicVolume(0f);
+        _ingameSettings.interactable = false;
     }
 
     void Update()
@@ -162,7 +168,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[1].gameObject.SetActive(false);
         _tutorialTexts[2].gameObject.SetActive(true);
         _tutorialTexts[2].text = $"{Localization.Instance.GetRightPhase(15)}";
-        _handRect.position = new Vector2(Screen.width / 2, Screen.height - 100);
+        _handRect.position = new Vector2(0 + Screen.width / 2, 340 + Screen.height / 2);
     }
 
     void PhaseTwoTwo()
@@ -172,7 +178,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[2].gameObject.SetActive(false);
         _tutorialTexts[3].gameObject.SetActive(true);
         _tutorialTexts[3].text = $"{Localization.Instance.GetRightPhase(16)}";
-        _handRect.position = new Vector2(100, Screen.height - 100);
+        _handRect.position = new Vector2(-800 + Screen.width / 2, 340 + Screen.height / 2);
     }
 
     void PhaseThree()
@@ -203,7 +209,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[4].gameObject.SetActive(false);
         _tutorialTexts[5].gameObject.SetActive(true);
         _tutorialTexts[5].text = $"{Localization.Instance.GetRightPhase(18)}";
-        _handRect.position = new Vector2();
+        _hand.enabled = true;
+        _handRect.position = new Vector2(-500 + Screen.width / 2, -300 + Screen.height / 2);
         GameManager.Instance.ContinueGame();
     }
 
@@ -215,6 +222,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[6].gameObject.SetActive(true);
         _tutorialTexts[6].text = $"{Localization.Instance.GetRightPhase(19)}";
         _closeShopButton.onClick.AddListener(PhaseSix);
+        _hand.enabled = true;
+        _handRect.position = new Vector2(900 + Screen.width / 2, 350 + Screen.height / 2); ;
     }
 
     public void PhaseSix()
@@ -229,21 +238,23 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _shopButton.interactable = false;
         _playButton.onClick.AddListener(GameManager.Instance.ContinueGame);
         _playButton.onClick.AddListener(SetSeven);
-        startBodyPosition = new Vector2(Screen.width / 2, 100);
-        _handRect.position = startBodyPosition;
+        _handRect.position = new Vector2(Screen.width / 2, -350 + Screen.height / 2);
     }
 
     public void SetSeven()
     {
         phases = Phases.Seven;
+        Resource.Instance.SetValue(50);
+        GameManager.Instance.AddScore(_saw.GetCost(), GameManager.Instance.GetScoreMultiplier(), new Vector2(Screen.width, Screen.height) * 2f);
+        startBodyPosition = new Vector2(40 + Screen.width / 2, -500 + Screen.height / 2);
+        _handRect.position = startBodyPosition;
     }
 
     public void PhaseSeven()
     {
-        SetSeven();
+        AudioManager.Instance.SetMusicVolume(1f);
         Pointer.Instance.enabled = true;
         _gameShopPanel.SetActive(true);
-        Resource.Instance.SetValue(50);
         _tutorialTexts[7].gameObject.SetActive(false);
         _tutorialTexts[8].gameObject.SetActive(true);
         _tutorialTexts[8].text = $"{Localization.Instance.GetRightPhase(21)}";
@@ -263,8 +274,10 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     void PhaseEight()
     {
+        _ingameSettings.interactable = true;
         Body.Instance.BecomeDynamic();
         Aircraft.Instance.enabled = true;
+        Destroy(Instance);
         Destroy(_instructionPanel);
         Destroy(_hand.gameObject);
         Destroy(gameObject);
@@ -304,15 +317,15 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             phases = Phases.TwoTwo;
         else if (phases == Phases.Three)
             phases = Phases.Four;
-        //_instructionPanel.SetActive(false);
-        //_hand.gameObject.SetActive(false);
+        _instructionPanel.SetActive(false);
+        _hand.gameObject.SetActive(false);
         canTap = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         canTap = true;
-        //_instructionPanel.SetActive(true);
-        //_hand.gameObject.SetActive(true);
+        _instructionPanel.SetActive(true);
+        _hand.gameObject.SetActive(true);
     }
 }

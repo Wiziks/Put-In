@@ -97,6 +97,11 @@ public class GameManager : MonoBehaviour
         ParticleText.Instance.ShowTextParticles(currentScore, point);
     }
 
+    public void SetScore(int value)
+    {
+        score = value;
+    }
+
     [ContextMenu("Show Unlock Panel")]
     public void ShowUnlockPanel(Weapon weapon)
     {
@@ -137,7 +142,7 @@ public class GameManager : MonoBehaviour
         _losePanel.SetActive(false);
         CircleSelector.Instance.GetBodyPart().transform.localPosition = CircleSelector.Instance.StartPosition;
         Aircraft.Instance.transform.position = Aircraft.Instance.StartPosition;
-        Body.Instance.BecomeStatic();
+        //Body.Instance.BecomeStatic();
         Aircraft.Instance.enabled = false;
         Pointer.Instance.Restore();
     }

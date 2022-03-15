@@ -23,6 +23,9 @@ public class Localization : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _loseLabel;
     [SerializeField] private TextMeshProUGUI _continueLabel;
     [SerializeField] private TextMeshProUGUI _finishLabel;
+    [SerializeField] private TextMeshProUGUI _question;
+    [SerializeField] private TextMeshProUGUI _yes;
+    [SerializeField] private TextMeshProUGUI _no;
     private Language language;
     private string nameOfLanguageTypeSave = "LanguageTypeSave";
     public static Localization Instance;
@@ -103,5 +106,12 @@ public class Localization : MonoBehaviour
         _loseLabel.text = $"{GetRightPhase(10)}";
         _continueLabel.text = $"{GetRightPhase(11)}";
         _finishLabel.text = $"{GetRightPhase(12)}";
+    }
+
+    void UpdateExitMenu()
+    {
+        _question.text = $"{GetRightPhase(22)}?";
+        _yes.text = $"{GetRightPhase(23)}?";
+        _no.text = $"{GetRightPhase(24)}?";
     }
 }

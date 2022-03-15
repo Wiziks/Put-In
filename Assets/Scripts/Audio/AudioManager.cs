@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
 
-    void Start()
+    void Awake()
     {
         Instance = this;
         if (PlayerPrefs.HasKey(musicVolumeSave))

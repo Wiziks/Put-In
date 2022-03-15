@@ -75,6 +75,9 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (!Resource.Instance.TryBuy(_prefab.GetCost())) return;
 
+        if (TutorialScript.Instance)
+            TutorialScript.Instance.phases = Phases.Eight;
+
         editState = EditState.Buy;
         _currentWeapon = Instantiate(_prefab, GameManager.Instance.GetParent());
         CameraManager.Instance.Zoom(7);
@@ -102,8 +105,6 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             _currentWeapon.Collider.enabled = true;
             Time.timeScale = 1f;
             _currentWeapon = null;
-            if(TutorialScript.Instance)
-                TutorialScript.Instance.phases = Phases.Eight;
         }
     }
 

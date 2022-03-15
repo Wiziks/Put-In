@@ -39,7 +39,6 @@ public class Pointer : MonoBehaviour
                     if (!firstTime)
                     {
                         Body.Instance.BecomeDynamic();
-                        _instructionPanel.SetActive(false);
                         _gameManager.gameObject.SetActive(true);
                         if (!TutorialScript.Instance)
                             Aircraft.Instance.enabled = true;
@@ -74,7 +73,8 @@ public class Pointer : MonoBehaviour
 
     public void Restore()
     {
-        firstTime = true;
+        firstTime = false;
+        transform.position = new Vector2(1000, 1000);
     }
 
     public static bool CheckHooked() { return isHooked; }
