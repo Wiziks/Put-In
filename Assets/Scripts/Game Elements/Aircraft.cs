@@ -156,11 +156,7 @@ public class Aircraft : MonoBehaviour
     {
         if (other.GetComponent<BodyPart>())
         {
-            if (TutorialScript.Instance)
-            {
-                TutorialScript.Instance.phases = Phases.Four;
-            }
-            else
+            if (!TutorialScript.Instance)
                 GameManager.Instance.GameOver();
         }
     }

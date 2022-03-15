@@ -72,5 +72,10 @@ public class Pointer : MonoBehaviour
             Destroy(springJoint2D);
     }
 
+    public void Restore()
+    {
+        firstTime = true;
+    }
+
     public static bool CheckHooked() { return isHooked; }
 }

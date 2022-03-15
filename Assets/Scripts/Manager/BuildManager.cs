@@ -102,6 +102,8 @@ public class BuildManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             _currentWeapon.Collider.enabled = true;
             Time.timeScale = 1f;
             _currentWeapon = null;
+            if(TutorialScript.Instance)
+                TutorialScript.Instance.phases = Phases.Eight;
         }
     }
 

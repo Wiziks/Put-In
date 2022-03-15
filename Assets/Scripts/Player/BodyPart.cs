@@ -20,8 +20,10 @@ public class BodyPart : MonoBehaviour
 
     public void BecomeStatic()
     {
-        _rigidbody2D.velocity = Vector2.zero;
+        if (_rigidbody2D.bodyType != RigidbodyType2D.Static)
+            _rigidbody2D.velocity = Vector2.zero;
         _rigidbody2D.gravityScale = 0f;
+        _rigidbody2D.bodyType = RigidbodyType2D.Static;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

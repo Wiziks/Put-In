@@ -26,6 +26,12 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _instructionPanel;
     [SerializeField] private Aircraft _aircraft;
+    [SerializeField] private Button _playButton;
+    [SerializeField] private Button _settingsButton;
+    [SerializeField] private Button _shopButton;
+    [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private Button _closeShopButton;
+    [SerializeField] private GameObject _gameShopPanel;
 
     [SerializeField] private RectTransform _handRect;
     [SerializeField] private Image _hand;
@@ -33,6 +39,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] private Sprite _untapSprite;
 
     [SerializeField] private TextMeshProUGUI[] _tutorialTexts;
+    [SerializeField] private Image _tutorialImage;
 
     private bool needTutorial = false;
     private string keyName = "TutorialKey";
@@ -89,8 +96,12 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             PhaseThree();
         else if (phases == Phases.Four)
             PhaseFour();
+        else if (phases == Phases.Seven)
+            PhaseSeven();
+        else if (phases == Phases.Eight)
+            PhaseEight();
     }
-
+    bool oneTime = true;
     void PhaseOne()
     {
         if (Pointer.CheckHooked())
@@ -98,7 +109,12 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             ShopPanel.Instance.gameObject.SetActive(false);
             _tutorialTexts[0].gameObject.SetActive(false);
             _hand.enabled = false;
-            Invoke(nameof(PhaseTwo), 1f);
+            _instructionPanel.SetActive(false);
+            if (oneTime)
+            {
+                Invoke(nameof(PhaseTwo), 0.5f);
+                oneTime = false;
+            }
         }
         if (_handRect.position != (Vector3)screenCenter && canMove)
         {
@@ -113,19 +129,23 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
-
     void PhaseTwo()
     {
-        if (Pointer.CheckHooked() && canTap)
+        phases = Phases.Two;
+        if (Pointer.CheckHooked())
         {
+            _instructionPanel.SetActive(false);
             Body.Instance.BecomeDynamic();
             _instructionPanel.SetActive(false);
             _tutorialTexts[1].gameObject.SetActive(false);
         }
         else
         {
-            phases = Phases.Two;
-            Body.Instance.BecomeStatic();
+            _instructionPanel.SetActive(true);
+            if (!Pointer.CheckHooked())
+                Body.Instance.BecomeStatic();
+            else
+                Body.Instance.BecomeDynamic();
             _instructionPanel.SetActive(true);
             _tutorialTexts[1].gameObject.SetActive(true);
             _tutorialTexts[1].text = $"{Localization.Instance.GetRightPhase(14)}";
@@ -137,6 +157,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Body.Instance.BecomeStatic();
         _instructionPanel.SetActive(true);
         _hand.enabled = true;
+        Pointer.Instance.enabled = false;
         Untap();
         _tutorialTexts[1].gameObject.SetActive(false);
         _tutorialTexts[2].gameObject.SetActive(true);
@@ -146,6 +167,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     void PhaseTwoTwo()
     {
+        Body.Instance.BecomeStatic();
+        _tutorialTexts[1].gameObject.SetActive(false);
         _tutorialTexts[2].gameObject.SetActive(false);
         _tutorialTexts[3].gameObject.SetActive(true);
         _tutorialTexts[3].text = $"{Localization.Instance.GetRightPhase(16)}";
@@ -154,6 +177,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     void PhaseThree()
     {
+        _hand.enabled = false;
+        _tutorialTexts[1].gameObject.SetActive(false);
         _tutorialTexts[3].gameObject.SetActive(false);
         _tutorialTexts[4].gameObject.SetActive(true);
         _tutorialTexts[4].text = $"{Localization.Instance.GetRightPhase(17)}";
@@ -166,7 +191,84 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     void PhaseFour()
     {
+        phases = Phases.Four;
+        _tutorialImage.rectTransform.localScale = Vector3.zero;
         _aircraft.SetSpeedMultiplier(1f);
+        _UIPanel.SetActive(true);
+        _gamePanel.SetActive(false);
+        _playButton.interactable = false;
+        _settingsButton.interactable = false;
+        _shopButton.interactable = true;
+        _shopButton.onClick.AddListener(PhaseFive);
+        _tutorialTexts[4].gameObject.SetActive(false);
+        _tutorialTexts[5].gameObject.SetActive(true);
+        _tutorialTexts[5].text = $"{Localization.Instance.GetRightPhase(18)}";
+        _handRect.position = new Vector2();
+        GameManager.Instance.ContinueGame();
+    }
+
+    public void PhaseFive()
+    {
+        phases = Phases.Five;
+        _shopPanel.SetActive(true);
+        _tutorialTexts[5].gameObject.SetActive(false);
+        _tutorialTexts[6].gameObject.SetActive(true);
+        _tutorialTexts[6].text = $"{Localization.Instance.GetRightPhase(19)}";
+        _closeShopButton.onClick.AddListener(PhaseSix);
+    }
+
+    public void PhaseSix()
+    {
+        phases = Phases.Six;
+        _shopPanel.SetActive(false);
+        _tutorialTexts[6].gameObject.SetActive(false);
+        _tutorialTexts[7].gameObject.SetActive(true);
+        _tutorialTexts[7].text = $"{Localization.Instance.GetRightPhase(20)}";
+        _UIPanel.SetActive(true);
+        _playButton.interactable = true;
+        _shopButton.interactable = false;
+        _playButton.onClick.AddListener(GameManager.Instance.ContinueGame);
+        _playButton.onClick.AddListener(SetSeven);
+        startBodyPosition = new Vector2(Screen.width / 2, 100);
+        _handRect.position = startBodyPosition;
+    }
+
+    public void SetSeven()
+    {
+        phases = Phases.Seven;
+    }
+
+    public void PhaseSeven()
+    {
+        SetSeven();
+        Pointer.Instance.enabled = true;
+        _gameShopPanel.SetActive(true);
+        Resource.Instance.SetValue(50);
+        _tutorialTexts[7].gameObject.SetActive(false);
+        _tutorialTexts[8].gameObject.SetActive(true);
+        _tutorialTexts[8].text = $"{Localization.Instance.GetRightPhase(21)}";
+        _hand.enabled = true;
+        if (_handRect.position != (Vector3)(screenCenter - new Vector2(250, 0)) && canMove)
+        {
+            Tap();
+            _handRect.position = Vector2.MoveTowards(_handRect.position, screenCenter - new Vector2(250, 0), Time.deltaTime * 100f);
+        }
+        else
+        {
+            Untap();
+            canMove = false;
+            Invoke(nameof(AccessMove), 1f);
+        }
+    }
+
+    void PhaseEight()
+    {
+        Body.Instance.BecomeDynamic();
+        Aircraft.Instance.enabled = true;
+        Destroy(_instructionPanel);
+        Destroy(_hand.gameObject);
+        Destroy(gameObject);
+        //FinishTutorial();
     }
 
     void AccessMove()
@@ -200,11 +302,17 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             phases = Phases.Three;
         else if (phases == Phases.TwoOne)
             phases = Phases.TwoTwo;
+        else if (phases == Phases.Three)
+            phases = Phases.Four;
+        //_instructionPanel.SetActive(false);
+        //_hand.gameObject.SetActive(false);
         canTap = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         canTap = true;
+        //_instructionPanel.SetActive(true);
+        //_hand.gameObject.SetActive(true);
     }
 }

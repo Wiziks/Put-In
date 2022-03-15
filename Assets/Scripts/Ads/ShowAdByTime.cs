@@ -25,7 +25,8 @@ public class ShowAdByTime : MonoBehaviour
             firstTime = true;
             canShow = false;
             timer = 0;
-            _interstitialAds.ShowAd();
+            if (!TutorialScript.Instance)
+                _interstitialAds.ShowAd();
         }
     }
 }

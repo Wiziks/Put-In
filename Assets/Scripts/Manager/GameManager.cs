@@ -71,14 +71,14 @@ public class GameManager : MonoBehaviour
         currentScore += currentDamage * multiplier;
         if (!Pointer.CheckHooked())
             currentScore *= 1.1f;
-        
+
         if (TutorialScript.Instance)
             if (TutorialScript.Instance.phases == Phases.Two)
             {
                 currentScore *= 10f;
                 TutorialScript.Instance.phases = Phases.TwoOne;
             }
-        
+
         score += currentScore;
         coinScore += currentScore;
         Resource.Instance.SetValue((int)(coinScore / scoreMultiplier));
@@ -138,6 +138,8 @@ public class GameManager : MonoBehaviour
         CircleSelector.Instance.GetBodyPart().transform.localPosition = CircleSelector.Instance.StartPosition;
         Aircraft.Instance.transform.position = Aircraft.Instance.StartPosition;
         Body.Instance.BecomeStatic();
+        Aircraft.Instance.enabled = false;
+        Pointer.Instance.Restore();
     }
 
     [ContextMenu("Reload")]
