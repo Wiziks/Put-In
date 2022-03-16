@@ -280,8 +280,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Destroy(Instance);
         Destroy(_instructionPanel);
         Destroy(_hand.gameObject);
-        Destroy(gameObject);
-        //FinishTutorial();
+        FinishTutorial();
     }
 
     void AccessMove()
@@ -328,4 +327,6 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _instructionPanel.SetActive(true);
         _hand.gameObject.SetActive(true);
     }
+
+    public string GetKeyName() { return keyName; }
 }

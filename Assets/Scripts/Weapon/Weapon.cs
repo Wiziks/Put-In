@@ -39,10 +39,6 @@ public class Weapon : MonoBehaviour
     void Awake()
     {
         nameOfSaveActive = $"isActive{gameObject.name}";
-        // nameOfSaveCost = $"cost{gameObject.name}";
-        // nameOfSaveStrength = $"strenght{gameObject.name}";
-        // nameOfSaveScore = $"score{gameObject.name}";
-        // nameOfSaveDamage = $"Damage{gameObject.name}";
 
         if (PlayerPrefs.HasKey(nameOfSaveActive))
             isActive = PlayerPrefs.GetInt(nameOfSaveActive) == 1 ? true : false;
@@ -159,5 +155,31 @@ public class Weapon : MonoBehaviour
         PlayerPrefs.Save();
         if (SnapScrolling.Instance)
             SnapScrolling.Instance.RefreshAll();
+    }
+
+    public string GetPlaceTypeString()
+    {
+        string placeName = "";
+        if (_placeType == PlaceType.Roof)
+        {
+            placeName = Localization.Instance.GetRightPhase(26);
+        }
+        else if (_placeType == PlaceType.Floor)
+        {
+            placeName = Localization.Instance.GetRightPhase(27);
+        }
+        else if (_placeType == PlaceType.Walls)
+        {
+            placeName = Localization.Instance.GetRightPhase(28);
+        }
+        else if (_placeType == PlaceType.NoLimit)
+        {
+            placeName = Localization.Instance.GetRightPhase(29);
+        }
+        else if (_placeType == PlaceType.NotPlaceble)
+        {
+            placeName = Localization.Instance.GetRightPhase(30);
+        }
+        return placeName;
     }
 }

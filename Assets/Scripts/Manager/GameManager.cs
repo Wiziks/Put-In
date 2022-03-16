@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Panels")]
     [SerializeField] private GameObject _losePanel;
     [SerializeField] private TextMeshProUGUI _finalScoreText;
-    public static GameManager Instance;
+    [SerializeField] private GameObject _finishButton;
 
     [Header("Editing World")]
     [SerializeField] private Transform _obstacles;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image _imageUnlockWeapon;
     [SerializeField] private TextMeshProUGUI _nameUnlockWeapon;
 
+    public static GameManager Instance;
 
     public Dictionary<Vector2, Weapon> WeaponDictionary = new Dictionary<Vector2, Weapon>();
 
@@ -129,11 +130,18 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        _finishButton.SetActive(false);
         Resource.Instance.SaveMaxValue((int)score);
         _losePanel.SetActive(true);
-        _finalScoreText.text = $"{Localization.Instance.GetRightPhase(1)}: {(int)score}";
+        Invoke(nameof(ShowFinishButton), 1f);
+        _finalScoreText.text = $"{Localization.Instance.GetRightPhase(1)}:\n{(int)score}";
         Body.Instance.BecomeStatic();
         Time.timeScale = 0f;
+    }
+
+    void ShowFinishButton()
+    {
+        _finishButton.SetActive(true);
     }
 
     public void ContinueGame()

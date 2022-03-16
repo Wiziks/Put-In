@@ -42,6 +42,7 @@ public class SnapScrolling : MonoBehaviour
             instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
             instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
             instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(5)} - {_weapons[i].GetStrenght()}";
+            instPans[i].transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(25)} - {_weapons[i].GetPlaceTypeString()}";
             if (_weapons[i].GetActive())
             {
                 instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
@@ -113,6 +114,7 @@ public class SnapScrolling : MonoBehaviour
             instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
             instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
             instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(5)} - {_weapons[i].GetStrenght()}";
+            instPans[i].transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(25)} - {_weapons[i].GetPlaceTypeString()}";
             if (_weapons[i].GetActive())
             {
                 instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";

@@ -56,7 +56,6 @@ public class Localization : MonoBehaviour
             UpdateSettings();
             UpdateLosePanel();
         }
-        this.language = Language.Russian;
     }
 
     public void ChangeLanguage()
@@ -113,5 +112,32 @@ public class Localization : MonoBehaviour
         _question.text = $"{GetRightPhase(22)}?";
         _yes.text = $"{GetRightPhase(23)}?";
         _no.text = $"{GetRightPhase(24)}?";
+    }
+
+    public void SetLanguage(Language value)
+    {
+        if (value == Language.Ukrainian)
+        {
+            language = Language.Ukrainian;
+            PlayerPrefs.SetString(nameOfLanguageTypeSave, "Ukrainian");
+            PlayerPrefs.Save();
+        }
+        else if (value == Language.Russian)
+        {
+            language = Language.Russian;
+            PlayerPrefs.SetString(nameOfLanguageTypeSave, "Russian");
+            PlayerPrefs.Save();
+        }
+        else if (value == Language.English)
+        {
+            language = Language.English;
+            PlayerPrefs.SetString(nameOfLanguageTypeSave, "English");
+            PlayerPrefs.Save();
+        }
+        // if (SnapScrolling.Instance)
+        //     SnapScrolling.Instance.RefreshAll();
+        // Resource.Instance.UpdateMaxScore();
+        // UpdateSettings();
+        // UpdateLosePanel();
     }
 }
