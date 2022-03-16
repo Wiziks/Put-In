@@ -6,10 +6,11 @@ using UnityEngine.Purchasing;
 
 public class IAPCore : MonoBehaviour, IStoreListener
 {
+
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
-    public static string noAds = "noads";
+    public static string noAds = "noAds";
     public static string unlockMina = "unlockMina";
     [Header("Weapons")]
     [SerializeField] private Weapon _mina;
@@ -29,11 +30,14 @@ public class IAPCore : MonoBehaviour, IStoreListener
     [Header("Buttons")]
     [SerializeField] private Button _adsButton;
     [SerializeField] private Button _allButton;
+    [Header("Successfull Panel")]
+    [SerializeField] private GameObject _successfullPanel;
+
 
     void Awake()
     {
         if (PlayerPrefs.HasKey("noAdsBuy"))
-            _adsButton.interactable = false;
+            Destroy(_adsButton.gameObject);
         if (_mina.GetActive())
             if (_thorns.GetActive())
                 if (_knife.GetActive())
@@ -41,7 +45,7 @@ public class IAPCore : MonoBehaviour, IStoreListener
                         if (_boomerang.GetActive())
                             if (_fireworks.GetActive())
                                 if (_bayraktar.GetActive())
-                                    _allButton.interactable = false;
+                                    Destroy(_allButton);
     }
 
     void Start()
@@ -61,6 +65,7 @@ public class IAPCore : MonoBehaviour, IStoreListener
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
+
         builder.AddProduct(noAds, ProductType.NonConsumable);
         builder.AddProduct(unlockMina, ProductType.NonConsumable);
         builder.AddProduct(unlockThorns, ProductType.NonConsumable);
@@ -74,51 +79,47 @@ public class IAPCore : MonoBehaviour, IStoreListener
         UnityPurchasing.Initialize(this, builder);
     }
 
+    // public void BuyNoAds()
+    // {
+    //     BuyProductID(noAds);
+    // }
+    // public void BuyMina()
+    // {
+    //     BuyProductID(unlockMina);
+    // }
+    // public void BuyThorns()
+    // {
+    //     BuyProductID(unlockThorns);
+    // }
+    // public void BuyKnife()
+    // {
+    //     BuyProductID(unlockKnife);
+    // }
+    // public void BuyMissile()
+    // {
+    //     BuyProductID(unlockMissile);
+    // }
+    // public void BuyBoomerang()
+    // {
+    //     BuyProductID(unlockBoomerang);
+    // }
+    // public void BuyFireworks()
+    // {
+    //     BuyProductID(unlockFireworks);
+    // }
+    // public void BuyBayraktar()
+    // {
+    //     BuyProductID(unlockBayraktar);
+    // }
+    // public void BuyAll()
+    // {
+    //     BuyProductID(unlockAll);
+    // }
 
-    private bool IsInitialized()
+    public void OnPurchaseComplete(Product product)
     {
-        return m_StoreController != null && m_StoreExtensionProvider != null;
+        BuyProductID(product.definition.id);
     }
-
-
-    public void BuyNoAds()
-    {
-        BuyProductID(noAds);
-    }
-    public void BuyMina()
-    {
-        BuyProductID(unlockMina);
-    }
-    public void BuyThorns()
-    {
-        BuyProductID(unlockThorns);
-    }
-    public void BuyKnife()
-    {
-        BuyProductID(unlockKnife);
-    }
-    public void BuyMissile()
-    {
-        BuyProductID(unlockMissile);
-    }
-    public void BuyBoomerang()
-    {
-        BuyProductID(unlockBoomerang);
-    }
-    public void BuyFireworks()
-    {
-        BuyProductID(unlockFireworks);
-    }
-    public void BuyBayraktar()
-    {
-        BuyProductID(unlockBayraktar);
-    }
-    public void BuyAll()
-    {
-        BuyProductID(unlockAll);
-    }
-
-
 
     void BuyProductID(string productId)
     {
@@ -142,6 +143,67 @@ public class IAPCore : MonoBehaviour, IStoreListener
         }
     }
 
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
+    {
+        if (String.Equals(args.purchasedProduct.definition.id, noAds, StringComparison.Ordinal))
+        {
+            // if (!PlayerPrefs.HasKey("noAdsBuy"))
+            // {
+            //     PlayerPrefs.SetInt("noAdsBuy", 0);
+            //     PlayerPrefs.Save();
+            //     Destroy(AdsInitializer.Instance);
+            //     Destroy(InterstitialAds.Instance);
+            //     Destroy(RewardedAds.Instance);
+            //     Destroy(ShowAdByTime.Instance);
+            // }
+            Debug.Log("ads");
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockMina, StringComparison.Ordinal))
+        {
+            //_mina.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockThorns, StringComparison.Ordinal))
+        {
+            //_thorns.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockKnife, StringComparison.Ordinal))
+        {
+            //_knife.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockMissile, StringComparison.Ordinal))
+        {
+            //_missile.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockBoomerang, StringComparison.Ordinal))
+        {
+           //_boomerang.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockFireworks, StringComparison.Ordinal))
+        {
+            //_fireworks.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockBayraktar, StringComparison.Ordinal))
+        {
+            //_bayraktar.SetActive(true);
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, unlockAll, StringComparison.Ordinal))
+        {
+            // _mina.SetActive(true);
+            // _thorns.SetActive(true);
+            // _knife.SetActive(true);
+            // _missile.SetActive(true);
+            // _boomerang.SetActive(true);
+            // _fireworks.SetActive(true);
+            // _bayraktar.SetActive(true);
+            Debug.Log("+");
+        }
+        else
+        {
+            Debug.Log(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
+        }
+        _successfullPanel.SetActive(true);
+        return PurchaseProcessingResult.Complete;
+    }
 
     public void RestorePurchases()
     {
@@ -157,6 +219,7 @@ public class IAPCore : MonoBehaviour, IStoreListener
             Debug.Log("RestorePurchases started ...");
 
             var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
+
             apple.RestoreTransactions((result) =>
             {
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
@@ -168,77 +231,22 @@ public class IAPCore : MonoBehaviour, IStoreListener
         }
     }
 
-
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         Debug.Log("OnInitialized: PASS");
-
         m_StoreController = controller;
         m_StoreExtensionProvider = extensions;
     }
 
+    private bool IsInitialized()
+    {
+        return m_StoreController != null && m_StoreExtensionProvider != null;
+    }
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
     }
-
-
-    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
-    {
-        if (String.Equals(args.purchasedProduct.definition.id, noAds, StringComparison.Ordinal))
-        {
-            if (!PlayerPrefs.HasKey("noAdsBuy"))
-            {
-                PlayerPrefs.SetInt("noAdsBuy", 0);
-                PlayerPrefs.Save();
-                Destroy(AdsInitializer.Instance);
-                Destroy(InterstitialAds.Instance);
-                Destroy(RewardedAds.Instance);
-                Destroy(ShowAdByTime.Instance);
-            }
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockMina, StringComparison.Ordinal))
-        {
-            _mina.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockThorns, StringComparison.Ordinal))
-        {
-            _thorns.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockKnife, StringComparison.Ordinal))
-        {
-            _knife.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockMissile, StringComparison.Ordinal))
-        {
-            _missile.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockBoomerang, StringComparison.Ordinal))
-        {
-            _boomerang.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockFireworks, StringComparison.Ordinal))
-        {
-            _fireworks.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockBayraktar, StringComparison.Ordinal))
-        {
-            _bayraktar.SetActive(true);
-        }
-        else if (String.Equals(args.purchasedProduct.definition.id, unlockAll, StringComparison.Ordinal))
-        {
-            _mina.SetActive(true);
-            _thorns.SetActive(true);
-            _knife.SetActive(true);
-            _missile.SetActive(true);
-            _boomerang.SetActive(true);
-            _fireworks.SetActive(true);
-            _bayraktar.SetActive(true);
-        }
-        return PurchaseProcessingResult.Complete;
-    }
-
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {

@@ -56,7 +56,7 @@ public class Localization : MonoBehaviour
             }
             UpdateSettings();
             UpdateLosePanel();
-            _succesfullText.text = $"{GetRightPhase(32)}";
+            _succesfullText.text = $"{GetRightPhase(32)}!";
         }
     }
 
@@ -88,7 +88,7 @@ public class Localization : MonoBehaviour
         Resource.Instance.UpdateMaxScore();
         UpdateSettings();
         UpdateLosePanel();
-        _succesfullText.text = $"{GetRightPhase(32)}";
+        _succesfullText.text = $"{GetRightPhase(32)}!";
     }
 
     public Language GetLanguage() { return language; }
