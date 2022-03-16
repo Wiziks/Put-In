@@ -136,12 +136,12 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(ShowFinishButton), 1f);
         _finalScoreText.text = $"{Localization.Instance.GetRightPhase(1)}:\n{(int)score}";
         Body.Instance.BecomeStatic();
-        Time.timeScale = 0f;
     }
 
     void ShowFinishButton()
     {
         _finishButton.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void ContinueGame()
