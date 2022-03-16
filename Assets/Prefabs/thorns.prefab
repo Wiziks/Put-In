@@ -130,9 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03add62fbf8a74418fa56e1001f0985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameUkr: "\u0428\u0438\u043F\u0438"
-  _nameRus: "\u0428\u0438\u043F\u044B"
-  _nameEng: Thorns
+  _nameUkr: "\u0428\u0418\u041F\u0418"
+  _nameRus: "\u0428\u0418\u041F\u042B"
+  _nameEng: THORNS
   _cost: 50
   _damageKoeficient: 15
   _placeType: 2

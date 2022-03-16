@@ -130,9 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f881f6a58df2fb8468a2f963d5549889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameUkr: "\u0411\u0430\u0439\u0440\u0430\u043A\u0442\u0430\u0440"
-  _nameRus: "\u0411\u0430\u0439\u0440\u0430\u043A\u0442\u0430\u0440"
-  _nameEng: Bayraktar
+  _nameUkr: "\u0411\u0410\u0419\u0420\u0410\u041A\u0422\u0410\u0420"
+  _nameRus: "\u0411\u0410\u0419\u0420\u0410\u041A\u0422\u0410\u0420"
+  _nameEng: BAYRAKTAR
   _cost: 250
   _damageKoeficient: 0
   _placeType: 4

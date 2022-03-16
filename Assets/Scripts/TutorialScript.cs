@@ -61,7 +61,6 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             Destroy(gameObject);
             return;
-            //needTutorial = PlayerPrefs.GetInt(keyName) == 1 ? true : false;
         }
         else
             needTutorial = true;

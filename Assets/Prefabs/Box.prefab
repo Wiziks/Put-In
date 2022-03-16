@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5065b1f419b34d04f823829011498ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameUkr: "\u0424\u0435\u0454\u0440\u0432\u0435\u0440\u043A"
-  _nameRus: "\u0424\u0435\u0439\u0435\u0440\u0432\u0435\u0440\u043A"
-  _nameEng: Fireworks
+  _nameUkr: "\u0424\u0415\u0404\u0420\u0412\u0415\u0420\u041A"
+  _nameRus: "\u0424\u0415\u0419\u0415\u0420\u0412\u0415\u0420\u041A"
+  _nameEng: FIREWORKS
   _cost: 200
   _damageKoeficient: 75
   _placeType: 3

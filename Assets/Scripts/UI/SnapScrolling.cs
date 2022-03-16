@@ -37,23 +37,26 @@ public class SnapScrolling : MonoBehaviour
         for (int i = 0; i < panCount; i++)
         {
             instPans[i] = Instantiate(panPrefab, transform, false);
-            instPans[i].transform.GetChild(0).GetComponent<Image>().sprite = _weapons[i].GetSprite();
-            SetSize(_weapons[i].GetSprite(), instPans[i].transform.GetChild(0).GetComponent<Image>());
-            instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
-            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
-            instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(5)} - {_weapons[i].GetStrenght()}";
-            instPans[i].transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(25)} - {_weapons[i].GetPlaceTypeString()}";
+            instPans[i].transform.GetChild(1).GetComponent<Image>().sprite = _weapons[i].GetSprite();
+            SetSize(_weapons[i].GetSprite(), instPans[i].transform.GetChild(1).GetComponent<Image>());
+            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
             if (_weapons[i].GetActive())
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
-                instPans[i].transform.GetChild(5).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
+                instPans[i].transform.GetChild(4).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(5).GetComponent<Button>().enabled = false;
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
             }
             else
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(7)} {_weapons[i].GetUnlockScore()}";
-                instPans[i].transform.GetChild(5).gameObject.SetActive(true);
-                instPans[i].transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(7)} {_weapons[i].GetUnlockScore()}";
+                instPans[i].transform.GetChild(4).gameObject.SetActive(true);
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(31)}";
                 instPans[i].transform.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(1).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(0.5f, 0.5f, 0.5f, 1);
             }
             if (i == 0) continue;
             instPans[i].transform.localPosition = new Vector2(instPans[i - 1].transform.localPosition.x +
@@ -109,19 +112,26 @@ public class SnapScrolling : MonoBehaviour
     {
         for (int i = 0; i < panCount; i++)
         {
-            instPans[i].transform.GetChild(0).GetComponent<Image>().sprite = _weapons[i].GetSprite();
-            SetSize(_weapons[i].GetSprite(), instPans[i].transform.GetChild(0).GetComponent<Image>());
-            instPans[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
-            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
-            instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(5)} - {_weapons[i].GetStrenght()}";
-            instPans[i].transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(25)} - {_weapons[i].GetPlaceTypeString()}";
+            instPans[i].transform.GetChild(1).GetComponent<Image>().sprite = _weapons[i].GetSprite();
+            SetSize(_weapons[i].GetSprite(), instPans[i].transform.GetChild(1).GetComponent<Image>());
+            instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _weapons[i].GetName();
             if (_weapons[i].GetActive())
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
+                instPans[i].transform.GetChild(4).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(5).GetComponent<Button>().enabled = false;
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
             }
             else
             {
-                instPans[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(7)} {_weapons[i].GetUnlockScore()}";
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(7)} {_weapons[i].GetUnlockScore()}";
+                instPans[i].transform.GetChild(4).gameObject.SetActive(true);
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(31)}";
+                instPans[i].transform.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(1).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(0.5f, 0.5f, 0.5f, 1);
             }
         }
     }
@@ -132,12 +142,12 @@ public class SnapScrolling : MonoBehaviour
         if (sprite.bounds.extents.x > sprite.bounds.extents.y)
         {
             temp = sprite.bounds.extents.y / sprite.bounds.extents.x;
-            image.rectTransform.sizeDelta = new Vector2(250, temp * 250);
+            image.rectTransform.sizeDelta = new Vector2(400, temp * 400);
         }
         else
         {
             temp = sprite.bounds.extents.x / sprite.bounds.extents.y;
-            image.rectTransform.sizeDelta = new Vector2(temp * 250, 250);
+            image.rectTransform.sizeDelta = new Vector2(temp * 400, 400);
         }
     }
 }

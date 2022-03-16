@@ -4966,9 +4966,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad279d2929ea4943910076c6cf88b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameUkr: "\u0420\u0430\u043A\u0435\u0442\u0430"
-  _nameRus: "\u0420\u0430\u043A\u0435\u0442\u0430"
-  _nameEng: Missile
+  _nameUkr: "\u0420\u0410\u041A\u0415\u0422\u0410"
+  _nameRus: "\u0420\u0410\u041A\u0415\u0422\u0410"
+  _nameEng: MISSILE
   _cost: 250
   _damageKoeficient: 75
   _placeType: 3
