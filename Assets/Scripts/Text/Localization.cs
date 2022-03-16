@@ -26,6 +26,7 @@ public class Localization : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _question;
     [SerializeField] private TextMeshProUGUI _yes;
     [SerializeField] private TextMeshProUGUI _no;
+    [SerializeField] private TextMeshProUGUI _succesfullText;
     private Language language;
     private string nameOfLanguageTypeSave = "LanguageTypeSave";
     public static Localization Instance;
@@ -55,6 +56,7 @@ public class Localization : MonoBehaviour
             }
             UpdateSettings();
             UpdateLosePanel();
+            _succesfullText.text = $"{GetRightPhase(32)}";
         }
     }
 
@@ -86,6 +88,7 @@ public class Localization : MonoBehaviour
         Resource.Instance.UpdateMaxScore();
         UpdateSettings();
         UpdateLosePanel();
+        _succesfullText.text = $"{GetRightPhase(32)}";
     }
 
     public Language GetLanguage() { return language; }
