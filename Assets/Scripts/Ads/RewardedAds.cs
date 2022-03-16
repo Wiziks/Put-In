@@ -10,13 +10,16 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     [SerializeField] private string adID = "Rewarded_Android";
 
+    public static RewardedAds Instance;
     void Awake()
     {
         _buttonShowAd.interactable = false;
+        Instance = this;
     }
 
     void Start()
     {
+        DestroyGameObject();
         LoadAd();
     }
 
@@ -74,5 +77,14 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     private void OnDestroy()
     {
         _buttonShowAd.onClick.RemoveAllListeners();
+    }
+
+    void DestroyGameObject()
+    {
+        if (PlayerPrefs.HasKey("noAdsBuy"))
+        {
+            _buttonShowAd.interactable = true;
+            Destroy(this);
+        }
     }
 }

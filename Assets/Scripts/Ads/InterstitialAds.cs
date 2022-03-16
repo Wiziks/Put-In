@@ -6,10 +6,13 @@ using UnityEngine.Advertisements;
 public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] private string adID = "Interstitial_Android";
+    public static InterstitialAds Instance;
 
     void Awake()
     {
+        DestroyGameObject();
         LoadAd();
+        Instance = this;
     }
 
     public void LoadAd()
@@ -52,5 +55,11 @@ public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
         LoadAd();
+    }
+
+    void DestroyGameObject()
+    {
+        if (PlayerPrefs.HasKey("noAdsBuy"))
+            Destroy(this);
     }
 }

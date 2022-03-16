@@ -9,6 +9,12 @@ public class ShowAdByTime : MonoBehaviour
     float timer;
     bool firstTime;
     bool canShow = true;
+    public static ShowAdByTime Instance;
+    private void Awake()
+    {
+        DestroyGameObject();
+        Instance = this;
+    }
     void Update()
     {
         if (!firstTime) return;
@@ -28,5 +34,11 @@ public class ShowAdByTime : MonoBehaviour
             if (!TutorialScript.Instance)
                 _interstitialAds.ShowAd();
         }
+    }
+
+    void DestroyGameObject()
+    {
+        if (PlayerPrefs.HasKey("noAdsBuy"))
+            Destroy(this);
     }
 }
