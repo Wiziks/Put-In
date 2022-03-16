@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Purchasing;
 
 
@@ -10,6 +11,7 @@ public class IAPCore : MonoBehaviour, IStoreListener
 
     public static string noAds = "noads";
     public static string unlockMina = "unlockMina";
+    [Header("Weapons")]
     [SerializeField] private Weapon _mina;
     public static string unlockThorns = "unlockThorns";
     [SerializeField] private Weapon _thorns;
@@ -24,6 +26,23 @@ public class IAPCore : MonoBehaviour, IStoreListener
     public static string unlockBayraktar = "unlockBayraktar";
     [SerializeField] private Weapon _bayraktar;
     public static string unlockAll = "unlockAll";
+    [Header("Buttons")]
+    [SerializeField] private Button _adsButton;
+    [SerializeField] private Button _allButton;
+
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey("noAdsBuy"))
+            _adsButton.interactable = false;
+        if (_mina.GetActive())
+            if (_thorns.GetActive())
+                if (_knife.GetActive())
+                    if (_missile.GetActive())
+                        if (_boomerang.GetActive())
+                            if (_fireworks.GetActive())
+                                if (_bayraktar.GetActive())
+                                    _allButton.interactable = false;
+    }
 
     void Start()
     {
