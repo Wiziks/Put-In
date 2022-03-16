@@ -6,7 +6,6 @@ using UnityEngine.Purchasing;
 
 public class IAPCore : MonoBehaviour, IStoreListener
 {
-
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
@@ -79,43 +78,6 @@ public class IAPCore : MonoBehaviour, IStoreListener
         UnityPurchasing.Initialize(this, builder);
     }
 
-    // public void BuyNoAds()
-    // {
-    //     BuyProductID(noAds);
-    // }
-    // public void BuyMina()
-    // {
-    //     BuyProductID(unlockMina);
-    // }
-    // public void BuyThorns()
-    // {
-    //     BuyProductID(unlockThorns);
-    // }
-    // public void BuyKnife()
-    // {
-    //     BuyProductID(unlockKnife);
-    // }
-    // public void BuyMissile()
-    // {
-    //     BuyProductID(unlockMissile);
-    // }
-    // public void BuyBoomerang()
-    // {
-    //     BuyProductID(unlockBoomerang);
-    // }
-    // public void BuyFireworks()
-    // {
-    //     BuyProductID(unlockFireworks);
-    // }
-    // public void BuyBayraktar()
-    // {
-    //     BuyProductID(unlockBayraktar);
-    // }
-    // public void BuyAll()
-    // {
-    //     BuyProductID(unlockAll);
-    // }
-
     public void OnPurchaseComplete(Product product)
     {
         BuyProductID(product.definition.id);
@@ -147,55 +109,53 @@ public class IAPCore : MonoBehaviour, IStoreListener
     {
         if (String.Equals(args.purchasedProduct.definition.id, noAds, StringComparison.Ordinal))
         {
-            // if (!PlayerPrefs.HasKey("noAdsBuy"))
-            // {
-            //     PlayerPrefs.SetInt("noAdsBuy", 0);
-            //     PlayerPrefs.Save();
-            //     Destroy(AdsInitializer.Instance);
-            //     Destroy(InterstitialAds.Instance);
-            //     Destroy(RewardedAds.Instance);
-            //     Destroy(ShowAdByTime.Instance);
-            // }
-            Debug.Log("ads");
+            if (!PlayerPrefs.HasKey("noAdsBuy"))
+            {
+                PlayerPrefs.SetInt("noAdsBuy", 0);
+                PlayerPrefs.Save();
+                Destroy(AdsInitializer.Instance);
+                Destroy(InterstitialAds.Instance);
+                Destroy(RewardedAds.Instance);
+                Destroy(ShowAdByTime.Instance);
+            }
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockMina, StringComparison.Ordinal))
         {
-            //_mina.SetActive(true);
+            _mina.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockThorns, StringComparison.Ordinal))
         {
-            //_thorns.SetActive(true);
+            _thorns.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockKnife, StringComparison.Ordinal))
         {
-            //_knife.SetActive(true);
+            _knife.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockMissile, StringComparison.Ordinal))
         {
-            //_missile.SetActive(true);
+            _missile.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockBoomerang, StringComparison.Ordinal))
         {
-           //_boomerang.SetActive(true);
+           _boomerang.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockFireworks, StringComparison.Ordinal))
         {
-            //_fireworks.SetActive(true);
+            _fireworks.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockBayraktar, StringComparison.Ordinal))
         {
-            //_bayraktar.SetActive(true);
+            _bayraktar.SetActive(true);
         }
         else if (String.Equals(args.purchasedProduct.definition.id, unlockAll, StringComparison.Ordinal))
         {
-            // _mina.SetActive(true);
-            // _thorns.SetActive(true);
-            // _knife.SetActive(true);
-            // _missile.SetActive(true);
-            // _boomerang.SetActive(true);
-            // _fireworks.SetActive(true);
-            // _bayraktar.SetActive(true);
-            Debug.Log("+");
+            _mina.SetActive(true);
+            _thorns.SetActive(true);
+            _knife.SetActive(true);
+            _missile.SetActive(true);
+            _boomerang.SetActive(true);
+            _fireworks.SetActive(true);
+            _bayraktar.SetActive(true);
         }
         else
         {

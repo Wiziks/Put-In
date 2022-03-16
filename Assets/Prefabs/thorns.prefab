@@ -140,6 +140,7 @@ MonoBehaviour:
   _strenght: 50
   _sprite: {fileID: 7380567826842454940}
   _scoreToUnlock: 5000
+  _productId: unlockThorns
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

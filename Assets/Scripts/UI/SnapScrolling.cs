@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Purchasing;
 
 public class SnapScrolling : MonoBehaviour
 {
@@ -44,14 +45,17 @@ public class SnapScrolling : MonoBehaviour
             {
                 instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
                 instPans[i].transform.GetChild(4).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(5).GetComponent<IAPButton>().enabled = false;
                 instPans[i].transform.GetChild(5).GetComponent<Button>().enabled = false;
-                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<Text>().text = $"{Localization.Instance.GetRightPhase(6)}";
             }
             else
             {
                 instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(7)} {_weapons[i].GetUnlockScore()}";
                 instPans[i].transform.GetChild(4).gameObject.SetActive(true);
-                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(31)}";
+                if (i != 0)
+                    instPans[i].transform.GetChild(5).GetComponent<IAPButton>().productId = _weapons[i].GetProductID();
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<Text>().text = $"{Localization.Instance.GetRightPhase(31)}";
                 instPans[i].transform.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
                 instPans[i].transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
                 instPans[i].transform.GetChild(1).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
@@ -119,14 +123,22 @@ public class SnapScrolling : MonoBehaviour
             {
                 instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(4)} - {_weapons[i].GetCost()}";
                 instPans[i].transform.GetChild(4).gameObject.SetActive(false);
+                instPans[i].transform.GetChild(5).GetComponent<IAPButton>().enabled = false;
                 instPans[i].transform.GetChild(5).GetComponent<Button>().enabled = false;
-                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(6)}";
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<Text>().text = $"{Localization.Instance.GetRightPhase(6)}";
+                instPans[i].transform.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1);
+                instPans[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1);
+                instPans[i].transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1);
+                instPans[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1);
+                instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1);
             }
             else
             {
                 instPans[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(7)} {_weapons[i].GetUnlockScore()}";
                 instPans[i].transform.GetChild(4).gameObject.SetActive(true);
-                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{Localization.Instance.GetRightPhase(31)}";
+                if (i != 0)
+                    instPans[i].transform.GetChild(5).GetComponent<IAPButton>().productId = _weapons[i].GetProductID();
+                instPans[i].transform.GetChild(5).transform.GetChild(0).GetComponent<Text>().text = $"{Localization.Instance.GetRightPhase(31)}";
                 instPans[i].transform.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
                 instPans[i].transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);
                 instPans[i].transform.GetChild(1).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1);

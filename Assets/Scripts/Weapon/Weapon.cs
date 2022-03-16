@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int _strenght = 1;
     [SerializeField] protected SpriteRenderer _sprite;
     [SerializeField] private int _scoreToUnlock;
+    [SerializeField] private string _productId;
     [SerializeField] private UnityEvent EventOnStart;
     [SerializeField] private UnityEvent EventOnStand;
     [SerializeField] private UnityEvent EventOnDestroy;
@@ -103,6 +104,7 @@ public class Weapon : MonoBehaviour
     public int GetUnlockScore() { return _scoreToUnlock; }
     public float GetDamageKoeficient() { return _damageKoeficient; }
     public bool GetActive() { return isActive; }
+    public string GetProductID() { return _productId; }
 
     public void Stand()
     {
