@@ -61,6 +61,7 @@ public class Localization : MonoBehaviour
             UpdateSettings();
             UpdateLosePanel();
             UpdateRatePanel();
+            UpdateExitMenu();
             _succesfullText.text = $"{GetRightPhase(32)}!";
         }
     }
@@ -94,6 +95,7 @@ public class Localization : MonoBehaviour
         UpdateSettings();
         UpdateLosePanel();
         UpdateRatePanel();
+        UpdateExitMenu();
         _succesfullText.text = $"{GetRightPhase(32)}!";
     }
 
@@ -119,8 +121,8 @@ public class Localization : MonoBehaviour
     void UpdateExitMenu()
     {
         _question.text = $"{GetRightPhase(22)}?";
-        _yes.text = $"{GetRightPhase(23)}?";
-        _no.text = $"{GetRightPhase(24)}?";
+        _yes.text = $"{GetRightPhase(23)}";
+        _no.text = $"{GetRightPhase(24)}";
     }
 
     void UpdateRatePanel()
