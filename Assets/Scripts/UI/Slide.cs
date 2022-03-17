@@ -5,6 +5,7 @@ using UnityEngine;
 public class Slide : MonoBehaviour
 {
     [SerializeField] private float _slideSpeed = 2000f;
+    [SerializeField] private GameObject _exitButton;
     private RectTransform rectTransform;
     private Vector2 startPosition;
     bool inGame;
@@ -15,7 +16,7 @@ public class Slide : MonoBehaviour
     }
     public void Sliding(float y)
     {
-        if(inGame)
+        if (inGame)
             Disappear();
         StartCoroutine(SlidingCoroutine(y));
     }
@@ -39,9 +40,11 @@ public class Slide : MonoBehaviour
     public void Appear()
     {
         gameObject.SetActive(true);
-        rectTransform.position = new Vector2(960, 540);
+        rectTransform.position = new Vector2(0, 250);
         ShopPanel.Instance.gameObject.SetActive(false);
         inGame = true;
+        _exitButton.SetActive(true);
+        ShopPanel.Instance.gameObject.SetActive(true);
         Time.timeScale = 0f;
     }
 
@@ -50,5 +53,8 @@ public class Slide : MonoBehaviour
         rectTransform.position = startPosition;
         ShopPanel.Instance.gameObject.SetActive(true);
         Time.timeScale = 1f;
+        _exitButton.SetActive(false);
+        gameObject.SetActive(false);
+        ShopPanel.Instance.gameObject.SetActive(false);
     }
 }

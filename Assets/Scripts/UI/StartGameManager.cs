@@ -8,7 +8,10 @@ public class StartGameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _exitMenu;
     [SerializeField] private Slide _reviewPanel;
+    [SerializeField] private GameObject _instructionPanel;
+    [SerializeField] private GameObject _instructionText;
     [SerializeField] private UnityEvent _eventToStartGame;
+
     private string countOfGameEnter = "CountOfGameEnter";
     public static StartGameManager Instance;
 
@@ -35,7 +38,11 @@ public class StartGameManager : MonoBehaviour
     {
         _eventToStartGame.Invoke();
         if (!TutorialScript.Instance)
+        {
+            _instructionPanel.SetActive(true);
+            _instructionText.SetActive(true);
             Destroy(gameObject);
+        }
     }
 
     private void Update()
@@ -51,6 +58,6 @@ public class StartGameManager : MonoBehaviour
     [ContextMenu("Show Review")]
     public void ShowReview()
     {
-        _reviewPanel.Sliding(540f);
+        _reviewPanel.Sliding(100f);
     }
 }

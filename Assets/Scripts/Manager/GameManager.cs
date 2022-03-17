@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _losePanel;
     [SerializeField] private TextMeshProUGUI _finalScoreText;
     [SerializeField] private GameObject _finishButton;
+    [SerializeField] private GameObject _settings;
 
     [Header("Editing World")]
     [SerializeField] private Transform _obstacles;
@@ -55,6 +56,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         Speed = _startSpeed;
         UpdateScore();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+        {
+            _settings.SetActive(true);
+        }
     }
 
     IEnumerator SpeedChanger()
