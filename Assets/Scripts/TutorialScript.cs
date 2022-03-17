@@ -174,12 +174,13 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Body.Instance.BecomeStatic();
         _instructionPanel.SetActive(true);
         _hand.enabled = true;
+        _hand.gameObject.SetActive(true);
         Pointer.Instance.enabled = false;
         Untap();
         _tutorialTexts[1].gameObject.SetActive(false);
         _tutorialTexts[2].gameObject.SetActive(true);
         _tutorialTexts[2].text = $"{Localization.Instance.GetRightPhase(15)}";
-        _handRect.position = new Vector2(0 + Screen.width / 2, 340 + Screen.height / 2);
+        _handRect.position = new Vector2(Screen.width / 2, Screen.height - 200);
     }
 
     void PhaseTwoTwo()
@@ -189,7 +190,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[2].gameObject.SetActive(false);
         _tutorialTexts[3].gameObject.SetActive(true);
         _tutorialTexts[3].text = $"{Localization.Instance.GetRightPhase(16)}";
-        _handRect.position = new Vector2(-800 + Screen.width / 2, 340 + Screen.height / 2);
+        _handRect.position = new Vector2(160, Screen.height - 200);
     }
 
     void PhaseThree()
@@ -220,8 +221,9 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[4].gameObject.SetActive(false);
         _tutorialTexts[5].gameObject.SetActive(true);
         _tutorialTexts[5].text = $"{Localization.Instance.GetRightPhase(18)}";
+        _tutorialTexts[5].rectTransform.position = _shopButton.transform.position + new Vector3(0, 200);
         _hand.enabled = true;
-        _handRect.position = new Vector2(-500 + Screen.width / 2, -300 + Screen.height / 2);
+        _handRect.position = _shopButton.transform.position - new Vector3(0, 200);
         GameManager.Instance.ContinueGame();
     }
 
@@ -234,7 +236,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _tutorialTexts[6].text = $"{Localization.Instance.GetRightPhase(19)}";
         _closeShopButton.onClick.AddListener(PhaseSix);
         _hand.enabled = true;
-        _handRect.position = new Vector2(900 + Screen.width / 2, 350 + Screen.height / 2); ;
+        _handRect.position = new Vector2(Screen.width - 60, Screen.height - 190); ;
     }
 
     public void PhaseSix()
@@ -249,7 +251,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _shopButton.interactable = false;
         _playButton.onClick.AddListener(GameManager.Instance.ContinueGame);
         _playButton.onClick.AddListener(SetSeven);
-        _handRect.position = new Vector2(Screen.width / 2, -350 + Screen.height / 2);
+        _handRect.position = new Vector2(Screen.width / 2, 190);
     }
 
     public void SetSeven()
@@ -258,7 +260,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         GameManager.Instance.SetScore(0);
         Resource.Instance.SetValue(50);
         GameManager.Instance.AddScore(_saw.GetCost(), GameManager.Instance.GetScoreMultiplier(), new Vector2(Screen.width, Screen.height) * 2f);
-        startBodyPosition = new Vector2(40 + Screen.width / 2, -500 + Screen.height / 2);
+        startBodyPosition = new Vector2(Screen.width / 2, 40);
         _handRect.position = startBodyPosition;
     }
 
@@ -331,7 +333,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (phases != Phases.One)
         {
             _instructionPanel.SetActive(false);
-            _hand.gameObject.SetActive(false);
+            if (phases != Phases.TwoOne)
+                _hand.gameObject.SetActive(false);
             canTap = false;
         }
     }
