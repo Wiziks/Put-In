@@ -54,6 +54,5 @@ public class Slide : MonoBehaviour
         Time.timeScale = 1f;
         _exitButton.SetActive(false);
         gameObject.SetActive(false);
-        ShopPanel.Instance.gameObject.SetActive(false);
     }
 }
