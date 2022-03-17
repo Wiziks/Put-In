@@ -36,7 +36,6 @@ public class BodyPart : MonoBehaviour
             AudioManager.Instance.PlaySoundDamage();
             return;
         }
-
         Wall wall = other.gameObject.GetComponent<Wall>();
         if (wall)
         {

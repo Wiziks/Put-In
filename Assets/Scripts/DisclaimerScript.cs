@@ -43,7 +43,28 @@ public class DisclaimerScript : MonoBehaviour
     void ShowDisclaimerText()
     {
         _languagePanel.SetActive(false);
-        _disclaimerPanel.SetActive(true);
+
+
+        if (PlayerPrefs.HasKey("ShowDisclaimer"))
+        {
+            if (PlayerPrefs.GetInt("ShowDisclaimer") == 1)
+            {
+                _disclaimerPanel.SetActive(true);
+            }
+            else
+            {
+                foreach (GameObject gameObject in StartGameObjects)
+                {
+                    gameObject.SetActive(true);
+                }
+            }
+        }
+        else
+            _disclaimerPanel.SetActive(true);
+        PlayerPrefs.SetInt("ShowDisclaimer", 1);
+        PlayerPrefs.Save();
+
+        
         _disclaimerText.text = "<b>Disclaimer</b>\n\n";
         if (_localization.GetLanguage() == Language.Ukrainian)
             _disclaimerText.text += _textUKR;

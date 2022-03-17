@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _losePanel;
     [SerializeField] private TextMeshProUGUI _finalScoreText;
     [SerializeField] private GameObject _finishButton;
-    [SerializeField] private GameObject _settings;
+    [SerializeField] private Slide _settings;
+    [SerializeField] private GameObject _ingameShopPanel;
 
     [Header("Editing World")]
     [SerializeField] private Transform _obstacles;
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
         {
-            _settings.SetActive(true);
+            _settings.Appear();
         }
     }
 
@@ -135,7 +136,7 @@ public class GameManager : MonoBehaviour
 
     void HideSlidePanel()
     {
-        _slidePanel.Sliding(1180);
+        _slidePanel.Sliding(1200);
     }
 
     public void GameOver()
@@ -146,6 +147,7 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(ShowFinishButton), 1f);
         _finalScoreText.text = $"{Localization.Instance.GetRightPhase(1)}:\n{(int)score}";
         Body.Instance.BecomeStatic();
+        _ingameShopPanel.SetActive(false);
     }
 
     void ShowFinishButton()
@@ -163,12 +165,15 @@ public class GameManager : MonoBehaviour
         //Body.Instance.BecomeStatic();
         Aircraft.Instance.enabled = false;
         Pointer.Instance.Restore();
+        _ingameShopPanel.SetActive(true);
     }
 
     [ContextMenu("Reload")]
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt("ShowDisclaimer", 0);
+        PlayerPrefs.Save();
     }
 
     void UpdateScore()

@@ -40,11 +40,10 @@ public class Slide : MonoBehaviour
     public void Appear()
     {
         gameObject.SetActive(true);
-        rectTransform.position = new Vector2(0, 250);
+        rectTransform.position = new Vector2(Screen.width / 2, 250);
         ShopPanel.Instance.gameObject.SetActive(false);
         inGame = true;
         _exitButton.SetActive(true);
-        ShopPanel.Instance.gameObject.SetActive(true);
         Time.timeScale = 0f;
     }
 
