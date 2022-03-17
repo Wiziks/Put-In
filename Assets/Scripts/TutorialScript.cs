@@ -109,7 +109,8 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (Pointer.CheckHooked())
         {
-            ShopPanel.Instance.gameObject.SetActive(false);
+            if (ShopPanel.Instance)
+                ShopPanel.Instance.gameObject.SetActive(false);
             _tutorialTexts[0].gameObject.SetActive(false);
             _hand.enabled = false;
             _instructionPanel.SetActive(false);
@@ -132,15 +133,19 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
+    bool twoFirstTime = true;
+
     void PhaseTwo()
     {
         phases = Phases.Two;
         if (Pointer.CheckHooked())
         {
-            _instructionPanel.SetActive(false);
             Body.Instance.BecomeDynamic();
-            _instructionPanel.SetActive(false);
-            _tutorialTexts[1].gameObject.SetActive(false);
+            if (!twoFirstTime)
+            {
+                _instructionPanel.SetActive(false);
+                _tutorialTexts[1].gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -152,6 +157,15 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             _instructionPanel.SetActive(true);
             _tutorialTexts[1].gameObject.SetActive(true);
             _tutorialTexts[1].text = $"{Localization.Instance.GetRightPhase(14)}";
+            twoFirstTime = false;
+        }
+
+        if (twoFirstTime)
+        {
+            _instructionPanel.SetActive(true);
+            _tutorialTexts[1].gameObject.SetActive(true);
+            _tutorialTexts[1].text = $"{Localization.Instance.GetRightPhase(14)}";
+            Body.Instance.BecomeStatic();
         }
     }
 
@@ -314,9 +328,12 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             phases = Phases.TwoTwo;
         else if (phases == Phases.Three)
             phases = Phases.Four;
-        _instructionPanel.SetActive(false);
-        _hand.gameObject.SetActive(false);
-        canTap = false;
+        if (phases != Phases.One)
+        {
+            _instructionPanel.SetActive(false);
+            _hand.gameObject.SetActive(false);
+            canTap = false;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

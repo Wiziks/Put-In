@@ -18,14 +18,24 @@ public class DisclaimerScript : MonoBehaviour
     [SerializeField] private string _textUKR;
     [SerializeField] private string _textRUS;
     [SerializeField] private string _textENG;
+    [Header("Start GameObjects")]
+    public GameObject[] StartGameObjects;
+    public static DisclaimerScript Instance;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
+        foreach (GameObject gameObject in StartGameObjects)
+        {
+            gameObject.SetActive(false);
+        }
+
         if (PlayerPrefs.HasKey(_tutorialScript.GetKeyName()))
-            if (PlayerPrefs.GetInt(_tutorialScript.GetKeyName()) == 0)
-                _languagePanel.SetActive(true);
-            else
-                ShowDisclaimerText();
+            ShowDisclaimerText();
         else
             _languagePanel.SetActive(true);
     }

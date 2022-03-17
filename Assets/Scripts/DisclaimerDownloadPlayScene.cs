@@ -8,6 +8,11 @@ public class DisclaimerDownloadPlayScene : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
+        foreach (GameObject gameObject in DisclaimerScript.Instance.StartGameObjects)
+        {
+            gameObject.SetActive(true);
+        }
+        gameObject.SetActive(false);
     }
 }
