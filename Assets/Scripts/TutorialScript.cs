@@ -241,6 +241,7 @@ public class TutorialScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void SetSeven()
     {
         phases = Phases.Seven;
+        GameManager.Instance.SetScore(0);
         Resource.Instance.SetValue(50);
         GameManager.Instance.AddScore(_saw.GetCost(), GameManager.Instance.GetScoreMultiplier(), new Vector2(Screen.width, Screen.height) * 2f);
         startBodyPosition = new Vector2(40 + Screen.width / 2, -500 + Screen.height / 2);

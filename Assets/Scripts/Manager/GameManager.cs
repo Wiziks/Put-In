@@ -83,17 +83,18 @@ public class GameManager : MonoBehaviour
         score += currentScore;
         coinScore += currentScore;
         Resource.Instance.SetValue((int)(coinScore / scoreMultiplier));
-        foreach (Weapon weapon in _weapons)
-        {
-            if (!weapon.GetActive())
+        if (!TutorialScript.Instance)
+            foreach (Weapon weapon in _weapons)
             {
-                if (score >= weapon.GetUnlockScore())
+                if (!weapon.GetActive())
                 {
-                    weapon.SetActive(true);
-                    ShowUnlockPanel(weapon);
+                    if (score >= weapon.GetUnlockScore())
+                    {
+                        weapon.SetActive(true);
+                        ShowUnlockPanel(weapon);
+                    }
                 }
             }
-        }
         UpdateScore();
         ParticleText.Instance.ShowTextParticles(currentScore, point);
     }

@@ -36658,7 +36658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Maximum score: 2398467'
+  m_text: 'Maximum score: 239846'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4edfd83794d6eb14d9ea398a56a89a17, type: 2}
   m_sharedMaterial: {fileID: 5075111154465219806, guid: 4edfd83794d6eb14d9ea398a56a89a17, type: 2}
@@ -42262,7 +42262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7280795183713651468, guid: 3c2e7143a6fbe004d90ec5fd6a511c44, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7280795183713651469, guid: 3c2e7143a6fbe004d90ec5fd6a511c44, type: 3}
       propertyPath: m_Pivot.x
