@@ -27,6 +27,10 @@ public class Localization : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _yes;
     [SerializeField] private TextMeshProUGUI _no;
     [SerializeField] private TextMeshProUGUI _succesfullText;
+    [Header("Rate Panel")]
+    [SerializeField] private TextMeshProUGUI _headerRatePanel;
+    [SerializeField] private TextMeshProUGUI _textRatePanel;
+    [SerializeField] private TextMeshProUGUI _buttonRatePanel;
     private Language language;
     private string nameOfLanguageTypeSave = "LanguageTypeSave";
     public static Localization Instance;
@@ -56,6 +60,7 @@ public class Localization : MonoBehaviour
             }
             UpdateSettings();
             UpdateLosePanel();
+            UpdateRatePanel();
             _succesfullText.text = $"{GetRightPhase(32)}!";
         }
     }
@@ -88,6 +93,7 @@ public class Localization : MonoBehaviour
         Resource.Instance.UpdateMaxScore();
         UpdateSettings();
         UpdateLosePanel();
+        UpdateRatePanel();
         _succesfullText.text = $"{GetRightPhase(32)}!";
     }
 
@@ -115,6 +121,13 @@ public class Localization : MonoBehaviour
         _question.text = $"{GetRightPhase(22)}?";
         _yes.text = $"{GetRightPhase(23)}?";
         _no.text = $"{GetRightPhase(24)}?";
+    }
+
+    void UpdateRatePanel()
+    {
+        _headerRatePanel.text = $"{GetRightPhase(33)}!";
+        _textRatePanel.text = $"{GetRightPhase(34)}";
+        _buttonRatePanel.text = $"{GetRightPhase(35)}";
     }
 
     public void SetLanguage(Language value)

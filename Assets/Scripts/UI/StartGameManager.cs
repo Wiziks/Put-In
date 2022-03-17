@@ -7,13 +7,28 @@ using UnityEngine.EventSystems;
 public class StartGameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _exitMenu;
+    [SerializeField] private Slide _reviewPanel;
     [SerializeField] private UnityEvent _eventToStartGame;
+    private string countOfGameEnter = "CountOfGameEnter";
     public static StartGameManager Instance;
 
     void Start()
     {
         Time.timeScale = 1f;
         Instance = this;
+        if (PlayerPrefs.HasKey(countOfGameEnter))
+        {
+            int count = PlayerPrefs.GetInt(countOfGameEnter);
+            PlayerPrefs.SetInt(countOfGameEnter, count + 1);
+            PlayerPrefs.Save();
+            if (count > 5 && count % 2 == 0)
+                ShowReview();
+        }
+        else
+        {
+            PlayerPrefs.SetInt(countOfGameEnter, 0);
+            PlayerPrefs.Save();
+        }
     }
 
     public void StartGame()
@@ -32,4 +47,10 @@ public class StartGameManager : MonoBehaviour
     }
 
     public void Yes() { Application.Quit(); }
+
+    [ContextMenu("Show Review")]
+    public void ShowReview()
+    {
+        _reviewPanel.Sliding(540f);
+    }
 }
