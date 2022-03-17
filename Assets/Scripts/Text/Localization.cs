@@ -31,6 +31,9 @@ public class Localization : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _headerRatePanel;
     [SerializeField] private TextMeshProUGUI _textRatePanel;
     [SerializeField] private TextMeshProUGUI _buttonRatePanel;
+    [Header("Start Game Text")]
+    [SerializeField] private TextMeshProUGUI _startGameText;
+
     private Language language;
     private string nameOfLanguageTypeSave = "LanguageTypeSave";
     public static Localization Instance;
@@ -58,11 +61,7 @@ public class Localization : MonoBehaviour
                 this.language = Language.Ukrainian;
                 _changeButton.sprite = _ukr;
             }
-            UpdateSettings();
-            UpdateLosePanel();
-            UpdateRatePanel();
-            UpdateExitMenu();
-            _succesfullText.text = $"{GetRightPhase(32)}!";
+            UpdateAll();
         }
     }
 
@@ -89,14 +88,7 @@ public class Localization : MonoBehaviour
             PlayerPrefs.Save();
             _changeButton.sprite = _ukr;
         }
-        if (SnapScrolling.Instance)
-            SnapScrolling.Instance.RefreshAll();
-        Resource.Instance.UpdateMaxScore();
-        UpdateSettings();
-        UpdateLosePanel();
-        UpdateRatePanel();
-        UpdateExitMenu();
-        _succesfullText.text = $"{GetRightPhase(32)}!";
+        UpdateAll();
     }
 
     public Language GetLanguage() { return language; }
@@ -104,6 +96,20 @@ public class Localization : MonoBehaviour
     public string GetRightPhase(int index)
     {
         return PhraseArray[index].PhraseType[(int)language];
+    }
+
+    void UpdateAll()
+    {
+        if (SnapScrolling.Instance)
+            SnapScrolling.Instance.RefreshAll();
+        if (Resource.Instance)
+            Resource.Instance.UpdateMaxScore();
+        UpdateSettings();
+        UpdateLosePanel();
+        UpdateRatePanel();
+        UpdateExitMenu();
+        _succesfullText.text = $"{GetRightPhase(32)}!";
+        _startGameText.text = $"{GetRightPhase(36)}";
     }
 
     void UpdateSettings()
@@ -152,10 +158,6 @@ public class Localization : MonoBehaviour
             PlayerPrefs.SetString(nameOfLanguageTypeSave, "English");
             PlayerPrefs.Save();
         }
-        // if (SnapScrolling.Instance)
-        //     SnapScrolling.Instance.RefreshAll();
-        // Resource.Instance.UpdateMaxScore();
-        // UpdateSettings();
-        // UpdateLosePanel();
+        UpdateAll();
     }
 }

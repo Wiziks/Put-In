@@ -7,6 +7,7 @@ public class Pointer : MonoBehaviour
     [SerializeField] private GameObject ShopPanel;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _instructionPanel;
+    [SerializeField] private GameObject _instructionText;
     [SerializeField] private Camera _camera;
     [SerializeField] private CircleSelector _selectedBodyPart;
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -41,7 +42,11 @@ public class Pointer : MonoBehaviour
                         Body.Instance.BecomeDynamic();
                         _gameManager.gameObject.SetActive(true);
                         if (!TutorialScript.Instance)
+                        {
                             Aircraft.Instance.enabled = true;
+                            _instructionPanel.SetActive(false);
+                            _instructionText.SetActive(false);
+                        }
                         ShopPanel.SetActive(true);
                         firstTime = true;
                     }
