@@ -44,8 +44,10 @@ public class Pointer : MonoBehaviour
                         if (!TutorialScript.Instance)
                         {
                             Aircraft.Instance.enabled = true;
-                            _instructionPanel.SetActive(false);
-                            _instructionText.SetActive(false);
+                            if (_instructionPanel)
+                                _instructionPanel.SetActive(false);
+                            if (_instructionText)
+                                _instructionText.SetActive(false);
                         }
                         ShopPanel.SetActive(true);
                         firstTime = true;

@@ -20,6 +20,7 @@ public class Localization : MonoBehaviour
     [SerializeField] private Sprite _eng;
     [SerializeField] private Image _changeButton;
     [SerializeField] private TextMeshProUGUI _settingsLabel;
+    [SerializeField] private TextMeshProUGUI _settingsExitButton;
     [SerializeField] private TextMeshProUGUI _loseLabel;
     [SerializeField] private TextMeshProUGUI _continueLabel;
     [SerializeField] private TextMeshProUGUI _finishLabel;
@@ -110,6 +111,7 @@ public class Localization : MonoBehaviour
         UpdateExitMenu();
         _succesfullText.text = $"{GetRightPhase(32)}!";
         _startGameText.text = $"{GetRightPhase(36)}";
+        _settingsExitButton.text = $"{GetRightPhase(37)}";
     }
 
     void UpdateSettings()

@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding: {x: -8, y: -5, z: -8, w: -5}
+  m_Padding: {x: -3740576, y: 4.33e-43, z: -2.436467e-21, w: 4.33e-43}
   m_Softness: {x: 0, y: 0}
 --- !u!1 &20593476
 GameObject:
@@ -9890,6 +9890,7 @@ MonoBehaviour:
   _eng: {fileID: 21300000, guid: dd25331e086077740ad3a00eb086fc9a, type: 3}
   _changeButton: {fileID: 1060612064}
   _settingsLabel: {fileID: 1232796055}
+  _settingsExitButton: {fileID: 2090704339}
   _loseLabel: {fileID: 759954967}
   _continueLabel: {fileID: 197056409}
   _finishLabel: {fileID: 535307294}
@@ -10101,6 +10102,10 @@ MonoBehaviour:
     - "\u0414\u043B\u044F \u043D\u0430\u0447\u0430\u043B\u0430 \u0438\u0433\u0440\u044B
       \u0437\u0430\u0446\u0435\u043F\u0438\u0442\u0435\u0441\u044C \u0437\u0430 \u043C\u0430\u043D\u0435\u043A\u0435\u043D"
     - To start the game, grab the mannequin
+  - PhraseType:
+    - "\u0412\u0438\u0445\u0456\u0434"
+    - "\u0412\u044B\u0445\u043E\u0434"
+    - Exit
 --- !u!4 &499948643
 Transform:
   m_ObjectHideFlags: 0
