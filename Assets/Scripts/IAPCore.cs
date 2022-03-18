@@ -44,7 +44,7 @@ public class IAPCore : MonoBehaviour, IStoreListener
                         if (_boomerang.GetActive())
                             if (_fireworks.GetActive())
                                 if (_bayraktar.GetActive())
-                                    Destroy(_allButton);
+                                    Destroy(_allButton.gameObject);
     }
 
     void Start()

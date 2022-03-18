@@ -69,6 +69,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Collider: {fileID: 2386160285592080309}
+  nameOfSaveActive: ActiveMina
   _explosionEffect: {fileID: 2005701760753405578}
   _forceObject: {fileID: 2005701760318488803}
   _model: {fileID: 2005701760630463820}

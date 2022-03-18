@@ -4975,7 +4975,7 @@ MonoBehaviour:
   _size: {x: 1, y: 2}
   _strenght: 1
   _sprite: {fileID: 5879415139260491291}
-  _scoreToUnlock: 10000
+  _scoreToUnlock: 50000
   _productId: unlockMissile
   EventOnStart:
     m_PersistentCalls:
@@ -4987,6 +4987,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Collider: {fileID: 5879415138928268735}
+  nameOfSaveActive: ActiveMissile
   _speed: 0.1
   _explosionEffect: {fileID: 5879415138716945050}
   _forceObject: {fileID: 5879415139038930869}

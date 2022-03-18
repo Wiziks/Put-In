@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private UnityEvent EventOnDestroy;
     public Collider2D Collider;
     private bool isActive;
-    private string nameOfSaveActive;
+    [SerializeField] private string nameOfSaveActive;
     private string nameOfSaveCost;
     private string nameOfSaveStrength;
     private string nameOfSaveScore;
@@ -39,15 +39,15 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        nameOfSaveActive = $"isActive{gameObject.name}";
+        EventOnStart.Invoke();
+    }
 
+    public void ActivateWeapon()
+    {
         if (PlayerPrefs.HasKey(nameOfSaveActive))
             isActive = PlayerPrefs.GetInt(nameOfSaveActive) == 1 ? true : false;
         else
             isActive = false;
-
-
-        EventOnStart.Invoke();
     }
 
     public float GetKoeficient() { return _damageKoeficient; }
@@ -116,6 +116,12 @@ public class Weapon : MonoBehaviour
     {
         isActive = false;
         PlayerPrefs.SetInt(nameOfSaveActive, isActive ? 1 : 0);
+    }
+
+    [ContextMenu("Turn On")]
+    public void TurnOn()
+    {
+        SetActive(true);
     }
 
     public void SetCost(string value)

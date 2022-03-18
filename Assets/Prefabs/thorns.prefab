@@ -139,7 +139,7 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   _strenght: 50
   _sprite: {fileID: 7380567826842454940}
-  _scoreToUnlock: 5000
+  _scoreToUnlock: 10000
   _productId: unlockThorns
   EventOnStart:
     m_PersistentCalls:
@@ -151,6 +151,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Collider: {fileID: 2347945824980345679}
+  nameOfSaveActive: ActiveThorns
 --- !u!61 &2347945824980345679
 BoxCollider2D:
   m_ObjectHideFlags: 0

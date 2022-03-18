@@ -165,7 +165,7 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   _strenght: 5
   _sprite: {fileID: 1742067447578360597}
-  _scoreToUnlock: 20000
+  _scoreToUnlock: 80000
   _productId: unlockFireworks
   EventOnStart:
     m_PersistentCalls:
@@ -189,6 +189,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Collider: {fileID: 8473918836258323486}
+  nameOfSaveActive: ActiveBox
   _fireworkPrefab1: {fileID: 5714741622814728633, guid: 25074daf62993dd4fa2491e6f098771e, type: 3}
   _fireworkPrefab2: {fileID: 1485876824056129647, guid: 235537f4bfa5bb441b432ba4f39b12a6, type: 3}
   _fireworkPrefab3: {fileID: 3303344963798598930, guid: e61f3f853e313844cacd181dfab3bfc8, type: 3}

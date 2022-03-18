@@ -179,7 +179,7 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   _strenght: 25
   _sprite: {fileID: 1990572647}
-  _scoreToUnlock: 15000
+  _scoreToUnlock: 35000
   _productId: unlockBoomerang
   EventOnStart:
     m_PersistentCalls:
@@ -191,4 +191,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Collider: {fileID: 5114895904555970124}
+  nameOfSaveActive: ActiveBoomerang
   _speed: 2

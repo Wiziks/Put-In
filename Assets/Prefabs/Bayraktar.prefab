@@ -139,7 +139,7 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   _strenght: 1
   _sprite: {fileID: 1737899803}
-  _scoreToUnlock: 25000
+  _scoreToUnlock: 120000
   _productId: unlockBayraktar
   EventOnStart:
     m_PersistentCalls:
@@ -151,7 +151,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Collider: {fileID: 2543463279444322525}
-  _timeOfStan: 3
+  nameOfSaveActive: ActiveBayraktar
+  _timeOfStan: 6
   _speed: 10
 --- !u!61 &2543463279444322525
 BoxCollider2D:

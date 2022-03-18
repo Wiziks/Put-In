@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     private string startSpeedSave = "StartSpeedSave";
     private string deltaSpeedSave = "StartSpeedSave";
 
-    private int scoreMultiplier = 4;
+    private int scoreMultiplier = 8;
     private string scoreMultiplierSave = "ScoreMultiplierSave";
 
     void Start()
@@ -279,5 +279,11 @@ public class GameManager : MonoBehaviour
     public void DivCoinScore(int value)
     {
         coinScore -= value * scoreMultiplier;
+    }
+
+    [ContextMenu("Screenshot")]
+    public void Screenshot()
+    {
+        ScreenCapture.CaptureScreenshot("3.png");
     }
 }
