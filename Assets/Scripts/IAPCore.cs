@@ -9,23 +9,23 @@ public class IAPCore : MonoBehaviour, IStoreListener
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
-    public static string noAds = "noAds";
-    public static string unlockMina = "unlockMina";
+    public static string noAds = "noads";
+    public static string unlockMina = "unlockmina";
     [Header("Weapons")]
     [SerializeField] private Weapon _mina;
-    public static string unlockThorns = "unlockThorns";
+    public static string unlockThorns = "unlockthorns";
     [SerializeField] private Weapon _thorns;
-    public static string unlockKnife = "unlockKnife";
+    public static string unlockKnife = "unlockknife";
     [SerializeField] private Weapon _knife;
-    public static string unlockMissile = "unlockMissile";
+    public static string unlockMissile = "unlockmissile";
     [SerializeField] private Weapon _missile;
-    public static string unlockBoomerang = "unlockBoomerang";
+    public static string unlockBoomerang = "unlockboomerang";
     [SerializeField] private Weapon _boomerang;
-    public static string unlockFireworks = "unlockFireworks";
+    public static string unlockFireworks = "unlockfireworks";
     [SerializeField] private Weapon _fireworks;
-    public static string unlockBayraktar = "unlockBayraktar";
+    public static string unlockBayraktar = "unlockbayraktar";
     [SerializeField] private Weapon _bayraktar;
-    public static string unlockAll = "unlockAll";
+    public static string unlockAll = "unlockall";
     [Header("Buttons")]
     [SerializeField] private Button _adsButton;
     [SerializeField] private Button _allButton;

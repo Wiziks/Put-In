@@ -4976,7 +4976,7 @@ MonoBehaviour:
   _strenght: 1
   _sprite: {fileID: 5879415139260491291}
   _scoreToUnlock: 50000
-  _productId: unlockMissile
+  _productId: unlockmissile
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

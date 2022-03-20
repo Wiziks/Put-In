@@ -140,7 +140,7 @@ MonoBehaviour:
   _strenght: 1
   _sprite: {fileID: 1737899803}
   _scoreToUnlock: 120000
-  _productId: unlockBayraktar
+  _productId: unlockbayraktar
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

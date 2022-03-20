@@ -166,7 +166,7 @@ MonoBehaviour:
   _strenght: 5
   _sprite: {fileID: 1742067447578360597}
   _scoreToUnlock: 80000
-  _productId: unlockFireworks
+  _productId: unlockfireworks
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

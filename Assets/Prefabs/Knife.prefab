@@ -56,7 +56,7 @@ MonoBehaviour:
   _strenght: 50
   _sprite: {fileID: 8673475202482581806}
   _scoreToUnlock: 20000
-  _productId: unlockKnife
+  _productId: unlockknife
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

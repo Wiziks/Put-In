@@ -58,7 +58,7 @@ MonoBehaviour:
   _strenght: 1
   _sprite: {fileID: 2005701760630463820}
   _scoreToUnlock: 1000
-  _productId: unlockMina
+  _productId: unlockmina
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []

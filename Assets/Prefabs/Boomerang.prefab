@@ -180,7 +180,7 @@ MonoBehaviour:
   _strenght: 25
   _sprite: {fileID: 1990572647}
   _scoreToUnlock: 35000
-  _productId: unlockBoomerang
+  _productId: unlockboomerang
   EventOnStart:
     m_PersistentCalls:
       m_Calls: []
