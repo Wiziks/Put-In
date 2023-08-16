@@ -102,7 +102,7 @@ MonoBehaviour:
   _nameUkr: "\u041F\u0418\u041B\u041A\u0410"
   _nameRus: "\u041F\u0418\u041B\u0410"
   _nameEng: SAW
-  _cost: 50
+  _cost: 10
   _damageKoeficient: 10
   _placeType: 0
   _size: {x: 1, y: 1}

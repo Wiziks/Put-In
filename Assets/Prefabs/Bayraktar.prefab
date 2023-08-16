@@ -133,7 +133,7 @@ MonoBehaviour:
   _nameUkr: "\u0411\u0410\u0419\u0420\u0410\u041A\u0422\u0410\u0420"
   _nameRus: "\u0411\u0410\u0419\u0420\u0410\u041A\u0422\u0410\u0420"
   _nameEng: BAYRAKTAR
-  _cost: 250
+  _cost: 50
   _damageKoeficient: 0
   _placeType: 4
   _size: {x: 1, y: 1}

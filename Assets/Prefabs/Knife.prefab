@@ -49,7 +49,7 @@ MonoBehaviour:
   _nameUkr: "\u041D\u0406\u0416"
   _nameRus: "\u041D\u041E\u0416"
   _nameEng: KNIFE
-  _cost: 50
+  _cost: 15
   _damageKoeficient: 15
   _placeType: 1
   _size: {x: 1, y: 1}

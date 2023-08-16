@@ -4969,7 +4969,7 @@ MonoBehaviour:
   _nameUkr: "\u0420\u0410\u041A\u0415\u0422\u0410"
   _nameRus: "\u0420\u0410\u041A\u0415\u0422\u0410"
   _nameEng: MISSILE
-  _cost: 250
+  _cost: 45
   _damageKoeficient: 75
   _placeType: 3
   _size: {x: 1, y: 2}

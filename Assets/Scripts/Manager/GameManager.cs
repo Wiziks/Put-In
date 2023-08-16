@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI _scoreText;
     float score;
@@ -50,8 +49,7 @@ public class GameManager : MonoBehaviour
     private int scoreMultiplier = 8;
     private string scoreMultiplierSave = "ScoreMultiplierSave";
 
-    void Start()
-    {
+    void Start() {
         Instance = this;
         _scoreText.enabled = true;
         Time.timeScale = 1f;
@@ -59,33 +57,27 @@ public class GameManager : MonoBehaviour
         UpdateScore();
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
-        {
+    private void Update() {
+        if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu)) {
             _settings.Appear();
         }
     }
 
-    IEnumerator SpeedChanger()
-    {
-        while (true)
-        {
+    IEnumerator SpeedChanger() {
+        while (true) {
             Speed += delta;
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
     }
 
-    public void AddScore(float currentDamage, float multiplier, Vector2 point)
-    {
+    public void AddScore(float currentDamage, float multiplier, Vector2 point) {
         float currentScore = 0;
         currentScore += currentDamage * multiplier;
         if (!Pointer.CheckHooked())
             currentScore *= 1.1f;
 
         if (TutorialScript.Instance)
-            if (TutorialScript.Instance.phases == Phases.Two)
-            {
+            if (TutorialScript.Instance.phases == Phases.Two) {
                 currentScore *= 10f;
                 TutorialScript.Instance.phases = Phases.TwoOne;
             }
@@ -94,12 +86,9 @@ public class GameManager : MonoBehaviour
         coinScore += currentScore;
         Resource.Instance.SetValue((int)(coinScore / scoreMultiplier));
         if (!TutorialScript.Instance)
-            foreach (Weapon weapon in _weapons)
-            {
-                if (!weapon.GetActive())
-                {
-                    if (score >= weapon.GetUnlockScore())
-                    {
+            foreach (Weapon weapon in _weapons) {
+                if (!weapon.GetActive()) {
+                    if (score >= weapon.GetUnlockScore()) {
                         weapon.SetActive(true);
                         ShowUnlockPanel(weapon);
                     }
@@ -109,23 +98,18 @@ public class GameManager : MonoBehaviour
         ParticleText.Instance.ShowTextParticles(currentScore, point);
     }
 
-    public void SetScore(int value)
-    {
+    public void SetScore(int value) {
         score = value;
     }
 
     [ContextMenu("Show Unlock Panel")]
-    public void ShowUnlockPanel(Weapon weapon)
-    {
+    public void ShowUnlockPanel(Weapon weapon) {
         _imageUnlockWeapon.sprite = weapon.GetSprite();
         float temp;
-        if (_imageUnlockWeapon.sprite.bounds.extents.x > _imageUnlockWeapon.sprite.bounds.extents.y)
-        {
+        if (_imageUnlockWeapon.sprite.bounds.extents.x > _imageUnlockWeapon.sprite.bounds.extents.y) {
             temp = _imageUnlockWeapon.sprite.bounds.extents.y / _imageUnlockWeapon.sprite.bounds.extents.x;
             _imageUnlockWeapon.rectTransform.sizeDelta = new Vector2(75, temp * 75);
-        }
-        else
-        {
+        } else {
             temp = _imageUnlockWeapon.sprite.bounds.extents.x / _imageUnlockWeapon.sprite.bounds.extents.y;
             _imageUnlockWeapon.rectTransform.sizeDelta = new Vector2(temp * 75, 75);
         }
@@ -134,13 +118,11 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(HideSlidePanel), 3f);
     }
 
-    void HideSlidePanel()
-    {
+    void HideSlidePanel() {
         _slidePanel.Sliding(1200);
     }
 
-    public void GameOver()
-    {
+    public void GameOver() {
         _finishButton.SetActive(false);
         Resource.Instance.SaveMaxValue((int)score);
         _losePanel.SetActive(true);
@@ -150,14 +132,12 @@ public class GameManager : MonoBehaviour
         _ingameShopPanel.SetActive(false);
     }
 
-    void ShowFinishButton()
-    {
+    void ShowFinishButton() {
         _finishButton.SetActive(true);
         Time.timeScale = 0f;
     }
 
-    public void ContinueGame()
-    {
+    public void ContinueGame() {
         Time.timeScale = 1f;
         _losePanel.SetActive(false);
         CircleSelector.Instance.GetBodyPart().transform.localPosition = CircleSelector.Instance.StartPosition;
@@ -169,30 +149,25 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("Reload")]
-    public void ReloadScene()
-    {
+    public void ReloadScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PlayerPrefs.SetInt("ShowDisclaimer", 0);
         PlayerPrefs.Save();
     }
 
-    void UpdateScore()
-    {
+    void UpdateScore() {
         _scoreText.text = $"{Localization.Instance.GetRightPhase(0)}: {(int)score}";
     }
 
     public Transform GetParent() { return _obstacles; }
 
-    public float GetClosestXWall(Vector3 position)
-    {
+    public float GetClosestXWall(Vector3 position) {
         float minDistance = float.MaxValue;
         float closestX = float.MaxValue;
-        for (int i = 0; i < _walls.childCount; i++)
-        {
+        for (int i = 0; i < _walls.childCount; i++) {
             Transform childTransform = _walls.GetChild(i).transform;
             float distance = Vector2.Distance(childTransform.position, position);
-            if (distance < minDistance)
-            {
+            if (distance < minDistance) {
                 minDistance = distance;
                 closestX = childTransform.position.x + childTransform.localScale.x;
             }
@@ -200,16 +175,13 @@ public class GameManager : MonoBehaviour
         return closestX;
     }
 
-    public float GetClosestYFloor(Vector3 position)
-    {
+    public float GetClosestYFloor(Vector3 position) {
         float minDistance = float.MaxValue;
         float closestY = float.MaxValue;
-        for (int i = 0; i < _floor.childCount; i++)
-        {
+        for (int i = 0; i < _floor.childCount; i++) {
             Transform childTransform = _floor.GetChild(i).transform;
             float distance = Vector3.Distance(childTransform.position, position);
-            if (distance < minDistance)
-            {
+            if (distance < minDistance) {
                 minDistance = distance;
                 closestY = childTransform.position.y + childTransform.localScale.y / 2;
             }
@@ -217,16 +189,13 @@ public class GameManager : MonoBehaviour
         return closestY;
     }
 
-    public float GetClosestYRoof(Vector3 position)
-    {
+    public float GetClosestYRoof(Vector3 position) {
         float minDistance = float.MaxValue;
         float closestY = float.MaxValue;
-        for (int i = 0; i < _roof.childCount; i++)
-        {
+        for (int i = 0; i < _roof.childCount; i++) {
             Transform childTransform = _roof.GetChild(i).transform;
             float distance = Vector3.Distance(childTransform.position, position);
-            if (distance < minDistance)
-            {
+            if (distance < minDistance) {
                 minDistance = distance;
                 closestY = childTransform.position.y - childTransform.localScale.y / 2;
             }
@@ -240,22 +209,19 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Delete all")]
     public void DeleteAll() { PlayerPrefs.DeleteAll(); }
 
-    public void SetStartSpeed(string value)
-    {
+    public void SetStartSpeed(string value) {
         float.TryParse(value, out _startSpeed);
         PlayerPrefs.SetFloat(startSpeedSave, _startSpeed);
         PlayerPrefs.Save();
     }
 
-    public void SetDeltaSpeed(string value)
-    {
+    public void SetDeltaSpeed(string value) {
         float.TryParse(value, out delta);
         PlayerPrefs.SetFloat(deltaSpeedSave, delta);
         PlayerPrefs.Save();
     }
 
-    public void SetScoreMultiplier(string value)
-    {
+    public void SetScoreMultiplier(string value) {
         int.TryParse(value, out scoreMultiplier);
         PlayerPrefs.SetInt(scoreMultiplierSave, scoreMultiplier);
         PlayerPrefs.Save();
@@ -265,25 +231,21 @@ public class GameManager : MonoBehaviour
     public float GetDeltaSpeed() { return delta; }
     public float GetScoreMultiplier() { return scoreMultiplier; }
 
-    public void PauseGame()
-    {
+    public void PauseGame() {
         Time.timeScale = 0f;
         AudioManager.Instance.StopMusic();
     }
-    public void UnpauseGame()
-    {
+    public void UnpauseGame() {
         Time.timeScale = 1f;
         AudioManager.Instance.ContinueMusic();
     }
 
-    public void DivCoinScore(int value)
-    {
+    public void DivCoinScore(int value) {
         coinScore -= value * scoreMultiplier;
     }
 
     [ContextMenu("Screenshot")]
-    public void Screenshot()
-    {
+    public void Screenshot() {
         ScreenCapture.CaptureScreenshot("3.png");
     }
 }

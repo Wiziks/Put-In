@@ -159,7 +159,7 @@ MonoBehaviour:
   _nameUkr: "\u0424\u0415\u0404\u0420\u0412\u0415\u0420\u041A"
   _nameRus: "\u0424\u0415\u0419\u0415\u0420\u0412\u0415\u0420\u041A"
   _nameEng: FIREWORKS
-  _cost: 200
+  _cost: 40
   _damageKoeficient: 75
   _placeType: 3
   _size: {x: 1, y: 1}

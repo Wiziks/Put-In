@@ -173,7 +173,7 @@ MonoBehaviour:
   _nameUkr: "\u0411\u0423\u041C\u0415\u0420\u0410\u041D\u0413"
   _nameRus: "\u0411\u0423\u041C\u0415\u0420\u0410\u041D\u0413"
   _nameEng: BOOMERANG
-  _cost: 150
+  _cost: 30
   _damageKoeficient: 25
   _placeType: 0
   _size: {x: 1, y: 1}
